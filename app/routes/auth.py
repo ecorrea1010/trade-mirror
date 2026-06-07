@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from flask import session
 from app.forms import LoginForm, RegisterForm
-from app.extensions import FakeUser, db
+from app.extensions import db
 from app.models.user import User, UserProfile, UserRole, Role
 #from app.models.user import User  # cuando tengas el modelo, por ahora lo dejamos comentado
 
@@ -10,15 +10,16 @@ auth = Blueprint("auth", __name__)
 
 @auth.route("/", methods=["GET", "POST"])
 def login():
+    if current_user.is_authenticated:
+        return redirect(url_for("trades.dashboard"))
+
     form = LoginForm()
 
     if form.validate_on_submit():
-        username = form.username.data
-        password = form.password.data
+        user = User.query.filter_by(username=form.username.data).first()
 
-        if username == "admin" and password == "1234":
-            session["fake_logged_in"] = True
-            login_user(FakeUser())
+        if user and user.is_active and user.check_password(form.password.data):
+            login_user(user)
             return redirect(url_for("trades.dashboard"))
         else:
             flash("Usuario o contraseña incorrectos.", "danger")
@@ -29,7 +30,6 @@ def login():
 @auth.route("/logout")
 @login_required
 def logout():
-    session.pop("fake_logged_in", None)
     logout_user()
     return redirect(url_for("auth.login"))
 
