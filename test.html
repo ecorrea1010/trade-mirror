@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trade Mirror | Navbar Minimalista</title>
+  <!-- Bootstrap 5 CSS + Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
+      background: #f9fafb;
+      min-height: 100vh;
+    }
+
+    /* Navbar principal: minimalista, fondo blanco con sombra suave */
+    .navbar-minimal {
+      background-color: #ffffff;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
+      padding: 0.75rem 1.5rem;
+      transition: all 0.2s ease;
+      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
+    }
+
+    /* Brand (logo + texto) */
+    .navbar-brand-custom {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 600;
+      font-size: 1.35rem;
+      letter-spacing: -0.3px;
+      color: #1e293b;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .navbar-brand-custom:hover {
+      color: #1e293b;
+      opacity: 0.85;
+    }
+
+    .brand-icon {
+      font-size: 1.8rem;
+      color: #2c7da0;
+      background: rgba(44, 125, 160, 0.08);
+      width: 36px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      transition: all 0.2s;
+    }
+
+    .brand-text {
+      background: linear-gradient(135deg, #1f5e7e, #2c7da0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      font-weight: 650;
+    }
+
+    /* Links del navbar centrados */
+    .navbar-nav-center {
+      display: flex;
+      justify-content: center;
+      gap: 0.25rem;
+    }
+
+    .nav-link-custom {
+      font-weight: 500;
+      font-size: 0.95rem;
+      color: #475569;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      transition: all 0.2s ease;
+      margin: 0 2px;
+    }
+
+    .nav-link-custom:hover,
+    .nav-link-custom.active {
+      color: #2c7da0;
+      background-color: #f1f5f9;
+    }
+
+    /* Avatar / icono de usuario con dropdown */
+    .user-dropdown-toggle {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: none;
+      padding: 0.4rem 0.6rem;
+      border-radius: 40px;
+      transition: background 0.2s;
+      color: #334155;
+    }
+
+    .user-dropdown-toggle:hover,
+    .user-dropdown-toggle:focus {
+      background-color: #f1f5f9;
+    }
+
+    .user-icon {
+      font-size: 1.8rem;
+      color: #2c7da0;
+      line-height: 1;
+    }
+
+    .user-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #1e293b;
+    }
+
+    /* Dropdown menu personalizado (minimalista, redondeado) */
+    .dropdown-menu-custom {
+      border: none;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
+      padding: 0.5rem 0;
+      margin-top: 0.6rem;
+      min-width: 200px;
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(0px);
+      border: 1px solid #eef2f6;
+    }
+
+    .dropdown-item-custom {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 450;
+      color: #334155;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.15s;
+    }
+
+    .dropdown-item-custom i {
+      font-size: 1.1rem;
+      width: 22px;
+      color: #6c86a3;
+    }
+
+    .dropdown-item-custom:hover {
+      background-color: #f8fafc;
+      color: #2c7da0;
+    }
+
+    .dropdown-item-custom:hover i {
+      color: #2c7da0;
+    }
+
+    .dropdown-divider-custom {
+      margin: 0.4rem 0;
+      border-top: 1px solid #eef2f8;
+    }
+
+    /* Botón hamburguesa personalizado para móvil */
+    .navbar-toggler-custom {
+      border: none;
+      padding: 0.5rem 0.75rem;
+      border-radius: 12px;
+      color: #2c7da0;
+    }
+
+    .navbar-toggler-custom:focus {
+      box-shadow: none;
+      background-color: #f1f5f9;
+    }
+
+    /* Ajustes responsive: centrado en desktop, alineado en colapso */
+    @media (max-width: 991.98px) {
+      .navbar-minimal {
+        padding: 0.7rem 1rem;
+      }
+      .navbar-nav-center {
+        margin-top: 0.8rem;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      .nav-link-custom {
+        text-align: center;
+        width: 100%;
+      }
+      .user-dropdown-toggle .user-name {
+        display: none;
+      }
+      .dropdown-menu-custom {
+        position: absolute !important;
+        right: 0;
+        left: auto !important;
+      }
+    }
+
+    /* Contenido de ejemplo para visualizar el navbar en contexto */
+    .hero-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 5rem 1.5rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    .hero-title {
+      font-weight: 600;
+      font-size: 2rem;
+      background: linear-gradient(to right, #1e2a3a, #2c7da0);
+      background-clip: text;
+      -webkit-background-clip: text;
+      color: transparent;
+      letter-spacing: -0.02em;
+    }
+
+    .hero-text {
+      color: #4b5565;
+      margin-top: 1rem;
+    }
+
+    .card-demo {
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #edf2f7;
+      padding: 2rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navbar minimalista: izquierda (icono + trade mirror) | centro (opciones) | derecha (dropdown usuario) -->
+<nav class="navbar navbar-expand-lg navbar-minimal">
+  <div class="container-fluid px-0 px-lg-2">
+    
+    <!-- Logo / izquierda -->
+    <a class="navbar-brand-custom" href="#">
+      <span class="brand-icon">
+        <i class="bi bi-mirror"></i>
+      </span>
+      <span class="brand-text">trade mirror</span>
+    </a>
+
+    <!-- Botón hamburguesa (responsive) -->
+    <button class="navbar-toggler navbar-toggler-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCenteredContent" aria-controls="navbarCenteredContent" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-list" style="font-size: 1.6rem;"></i>
+    </button>
+
+    <!-- Contenido colapsable: aquí se agrupan las opciones centradas y el dropdown de usuario (en desktop, el dropdown se posiciona a la derecha) -->
+    <div class="collapse navbar-collapse" id="navbarCenteredContent">
+      
+      <!-- Opciones centradas (flex-grow-1 para empujar a los lados, pero con margen automático) -->
+      <div class="navbar-nav mx-auto navbar-nav-center">
+        <a class="nav-link nav-link-custom active" aria-current="page" href="#"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
+        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-graph-up me-1"></i> Dashboard</a>
+        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-currency-exchange me-1"></i> Mercados</a>
+        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-bell me-1"></i> Alertas</a>
+        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-question-circle me-1"></i> Recursos</a>
+      </div>
+      
+      <!-- Elemento a la derecha: menú desplegable de usuario -->
+      <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
+        <div class="dropdown">
+          <button class="user-dropdown-toggle dropdown-toggle" type="button" id="userDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person-circle user-icon"></i>
+            <span class="user-name">Alex M.</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-custom" aria-labelledby="userDropdownButton">
+            <li>
+              <a class="dropdown-item dropdown-item-custom" href="#">
+                <i class="bi bi-person-badge"></i> Mi perfil
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom" href="#">
+                <i class="bi bi-gear"></i> Configuración
+              </a>
+            </li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom" href="#">
+                <i class="bi bi-shield-lock"></i> Seguridad
+              </a>
+            </li>
+            <li><hr class="dropdown-divider dropdown-divider-custom"></li>
+            <li>
+              <a class="dropdown-item dropdown-item-custom" href="#">
+                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Contenido de muestra (para apreciar el navbar en contexto) -->
+<main class="container mt-5 pt-3">
+  <div class="hero-section card-demo">
+    <i class="bi bi-mirror" style="font-size: 3rem; color: #2c7da0; background: #eef6fc; padding: 0.8rem; border-radius: 60px;"></i>
+    <h1 class="hero-title mt-4">Refleja tu estrategia</h1>
+    <p class="hero-text">
+      Interfaz limpia, navegación centrada. El navbar se adapta fluidamente a cualquier pantalla.<br>
+      <strong>Minimalista, elegante y funcional.</strong>
+    </p>
+    <div class="mt-3 d-flex gap-3">
+      <span class="badge bg-light text-dark p-2 px-3 rounded-pill"><i class="bi bi-mirror"></i> trade mirror</span>
+      <span class="badge bg-light text-dark p-2 px-3 rounded-pill"><i class="bi bi-person-circle"></i> Dropdown listo</span>
+    </div>
+  </div>
+  
+  <div class="row mt-5 g-4 text-center">
+    <div class="col-md-4">
+      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
+        <i class="bi bi-bar-chart-steps fs-2 text-primary"></i>
+        <h5 class="mt-2">Análisis en tiempo real</h5>
+        <small class="text-muted">Datos sincronizados al instante</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
+        <i class="bi bi-archive fs-2 text-primary"></i>
+        <h5 class="mt-2">Cartera unificada</h5>
+        <small class="text-muted">Gestiona todo desde un solo lugar</small>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
+        <i class="bi bi-shield-check fs-2 text-primary"></i>
+        <h5 class="mt-2">Seguridad avanzada</h5>
+        <small class="text-muted">Protección de primer nivel</small>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Bootstrap JS + Popper (necesario para el dropdown) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Pequeña mejora UX: cierra el dropdown al hacer clic en enlaces (opcional)
+  document.querySelectorAll('.dropdown-item-custom').forEach(item => {
+    item.addEventListener('click', (e) => {
+      // Simular acción sin recargar completamente la demo
+      e.preventDefault();
+      const text = item.innerText.trim();
+      console.log(`Navbar: acción seleccionada → ${text}`);
+      // Mostrar un pequeño feedback sutil sin alertas intrusivas
+      const toastMsg = document.createElement('div');
+      toastMsg.innerText = `Demo: ${text}`;
+      toastMsg.style.position = 'fixed';
+      toastMsg.style.bottom = '20px';
+      toastMsg.style.left = '50%';
+      toastMsg.style.transform = 'translateX(-50%)';
+      toastMsg.style.backgroundColor = '#1e293b';
+      toastMsg.style.color = '#f1f5f9';
+      toastMsg.style.padding = '8px 18px';
+      toastMsg.style.borderRadius = '40px';
+      toastMsg.style.fontSize = '0.8rem';
+      toastMsg.style.zIndex = '9999';
+      toastMsg.style.backdropFilter = 'blur(8px)';
+      toastMsg.style.fontWeight = '500';
+      toastMsg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+      document.body.appendChild(toastMsg);
+      setTimeout(() => toastMsg.remove(), 1800);
+      // Cerrar dropdown automáticamente
+      const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('userDropdownButton'));
+      if(dropdown) dropdown.hide();
+    });
+  });
+
+  // Opcional: resaltar enlace activo según scroll (solo efecto visual)
+  const navLinks = document.querySelectorAll('.nav-link-custom');
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      e.preventDefault();
+      navLinks.forEach(l => l.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

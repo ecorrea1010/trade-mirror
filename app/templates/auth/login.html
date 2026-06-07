@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Iniciar sesión{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="split-container">
+
+  <!-- Panel izquierdo -->
+  <div class="col-12 col-md-6 split-left">
+    <div>
+      <div class="brand-icon">
+        <i class="bi bi-graph-up-arrow" style="font-size: 2.8rem;"></i>
+      </div>
+      <h1 class="left-title">Trade<span style="font-weight: 300;">Mirror</span></h1>
+      <p class="left-desc">
+        Un reflejo de tu operativa.<br>
+        Observa tus hábitos, analiza tus
+        decisiones y evoluciona como trader.
+      </p>
+      <div class="feature-badge">
+        <i class="bi bi-book"></i> <span>Autoconocimiento</span>
+        <i class="bi bi-journal-check"></i> <span>Disciplina</span>
+        <i class="bi bi-bar-chart"></i> <span>Progreso</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Panel derecho: formulario -->
+  <div class="col-12 col-md-6 split-right">
+    <div class="login-form-wrapper">
+      <h2 class="login-title">Bienvenido</h2>
+      <div class="login-sub">Ingresa tus credenciales para continuar</div>
+
+      <!-- Flash messages de Flask -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }} mb-3" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+      {% endwith %}
+
+      <form id="loginForm" method="POST" action="{{ url_for('auth.login') }}">
+        {{ form.hidden_tag() }}
+
+        <div class="input-icon-group">
+          <i class="bi bi-person input-icon"></i>
+          {{ form.username(
+              class="form-control form-control-custom",
+              placeholder="Usuario"
+          ) }}
+        </div>
+
+        <div class="input-icon-group">
+          <i class="bi bi-lock input-icon"></i>
+          {{ form.password(
+              class="form-control form-control-custom",
+              placeholder="Contraseña"
+          ) }}
+        </div>
+
+        <div class="d-flex justify-content-end mb-4">
+          <a href="#" class="forgot-link" id="forgotLink">¿Olvidaste tu contraseña?</a>
+        </div>
+
+        <button type="submit" class="btn btn-login">
+          <i class="bi bi-box-arrow-in-right me-2"></i> Iniciar sesión
+        </button>
+      </form>
+    </div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
+{% endblock %}
