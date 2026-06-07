@@ -36,4 +36,19 @@ def create_app(config_name=None):
     # from app.routes.trades import trades
     # app.register_blueprint(trades, url_prefix="/trades")
 
+    # Comando seed para poblar roles iniciales
+    @app.cli.command("seed")
+    def seed():
+        from app.models.user import Role
+        roles = [
+            Role(name="admin",  description="Acceso total al sistema"),
+            Role(name="trader", description="Registro y gestión de operaciones"),
+            Role(name="viewer", description="Solo lectura"),
+        ]
+        for role in roles:
+            if not Role.query.filter_by(name=role.name).first():
+                db.session.add(role)
+        db.session.commit()
+        print("Roles creados correctamente.")
+
     return app

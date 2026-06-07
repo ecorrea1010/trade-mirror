@@ -8,10 +8,12 @@ class Role(db.Model):
     __tablename__ = "roles"
 
     id          = db.Column(db.Integer, primary_key=True)
-    name        = db.Column(db.String(50), unique=True, nullable=False)  # admin, trader, viewer
+    name        = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(200))
     created_at  = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
     updated_at  = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
+
+    users = db.relationship("UserRole", back_populates="role")
 
     def __repr__(self):
         return f"<Role {self.name}>"
@@ -27,6 +29,9 @@ class User(UserMixin, db.Model):
     is_active = db.Column(db.Boolean, default=True, nullable=False)
     created_at = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), nullable=False)
     updated_at = db.Column(db.DateTime(timezone=True), default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc), nullable=False)
+
+    profile = db.relationship("UserProfile", back_populates="user", uselist=False)
+    roles   = db.relationship("UserRole", back_populates="user")
 
     def set_password(self, raw_password):
         self.password = generate_password_hash(raw_password)
