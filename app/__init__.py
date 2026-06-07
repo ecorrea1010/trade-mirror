@@ -20,6 +20,11 @@ def create_app(config_name=None):
     login_manager.login_message = "Necesitas iniciar sesión."
     login_manager.login_message_category = "warning"
 
+    # Carga el modelo de usuario
+    with app.app_context():
+        from app.models.user import Role, User, UserProfile, UserRole
+        db.create_all()  # Crea las tablas si no existen
+
     # Registra blueprints
     from app.routes.auth import auth
     app.register_blueprint(auth)

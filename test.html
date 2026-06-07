@@ -2,8 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trade Mirror | Navbar Minimalista</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Registro | Trade Mirror</title>
   <!-- Bootstrap 5 CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -16,379 +16,408 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-      background: #f9fafb;
+      background: linear-gradient(145deg, #f4f7fc 0%, #eef2f8 100%);
       min-height: 100vh;
-    }
-
-    /* Navbar principal: minimalista, fondo blanco con sombra suave */
-    .navbar-minimal {
-      background-color: #ffffff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03), 0 1px 2px rgba(0, 0, 0, 0.05);
-      padding: 0.75rem 1.5rem;
-      transition: all 0.2s ease;
-      border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-    }
-
-    /* Brand (logo + texto) */
-    .navbar-brand-custom {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-weight: 600;
-      font-size: 1.35rem;
-      letter-spacing: -0.3px;
-      color: #1e293b;
-      text-decoration: none;
-      transition: opacity 0.2s;
+      justify-content: center;
+      padding: 2rem 1.5rem;
     }
 
-    .navbar-brand-custom:hover {
-      color: #1e293b;
-      opacity: 0.85;
+    /* Tarjeta principal del formulario - minimalista, elegante */
+    .register-card {
+      max-width: 560px;
+      width: 100%;
+      background: #ffffff;
+      border-radius: 36px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2rem 2.2rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(226, 232, 240, 0.7);
     }
 
-    .brand-icon {
-      font-size: 1.8rem;
-      color: #2c7da0;
+    /* Encabezado */
+    .register-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .brand-icon-small {
       background: rgba(44, 125, 160, 0.08);
-      width: 36px;
-      height: 36px;
+      width: 56px;
+      height: 56px;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 12px;
-      transition: all 0.2s;
+      border-radius: 28px;
+      margin-bottom: 1rem;
     }
 
-    .brand-text {
+    .brand-icon-small i {
+      font-size: 2rem;
+      color: #2c7da0;
+    }
+
+    .register-title {
+      font-weight: 650;
+      font-size: 1.8rem;
+      letter-spacing: -0.3px;
       background: linear-gradient(135deg, #1f5e7e, #2c7da0);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      font-weight: 650;
+      margin-bottom: 0.3rem;
     }
 
-    /* Links del navbar centrados */
-    .navbar-nav-center {
-      display: flex;
-      justify-content: center;
-      gap: 0.25rem;
-    }
-
-    .nav-link-custom {
-      font-weight: 500;
-      font-size: 0.95rem;
-      color: #475569;
-      padding: 0.5rem 1rem;
-      border-radius: 40px;
-      transition: all 0.2s ease;
-      margin: 0 2px;
-    }
-
-    .nav-link-custom:hover,
-    .nav-link-custom.active {
-      color: #2c7da0;
-      background-color: #f1f5f9;
-    }
-
-    /* Avatar / icono de usuario con dropdown */
-    .user-dropdown-toggle {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: transparent;
-      border: none;
-      padding: 0.4rem 0.6rem;
-      border-radius: 40px;
-      transition: background 0.2s;
-      color: #334155;
-    }
-
-    .user-dropdown-toggle:hover,
-    .user-dropdown-toggle:focus {
-      background-color: #f1f5f9;
-    }
-
-    .user-icon {
-      font-size: 1.8rem;
-      color: #2c7da0;
-      line-height: 1;
-    }
-
-    .user-name {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: #1e293b;
-    }
-
-    /* Dropdown menu personalizado (minimalista, redondeado) */
-    .dropdown-menu-custom {
-      border: none;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
-      padding: 0.5rem 0;
-      margin-top: 0.6rem;
-      min-width: 200px;
-      background: rgba(255, 255, 255, 0.98);
-      backdrop-filter: blur(0px);
-      border: 1px solid #eef2f6;
-    }
-
-    .dropdown-item-custom {
-      padding: 0.6rem 1.2rem;
+    .register-sub {
+      color: #5b6e8c;
       font-size: 0.85rem;
-      font-weight: 450;
-      color: #334155;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      transition: all 0.15s;
+      border-left: 2px solid #2c7da0;
+      padding-left: 0.75rem;
+      display: inline-block;
+      margin-top: 0.25rem;
     }
 
-    .dropdown-item-custom i {
+    /* Campos de formulario minimalistas */
+    .form-group {
+      margin-bottom: 1.3rem;
+    }
+
+    .input-icon-group {
+      position: relative;
+    }
+
+    .input-icon-group .form-control-custom {
+      padding-left: 2.8rem;
+    }
+
+    .form-control-custom {
+      width: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      background-color: #ffffff;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .form-control-custom:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
+      outline: none;
+    }
+
+    .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8e9eae;
       font-size: 1.1rem;
-      width: 22px;
-      color: #6c86a3;
+      pointer-events: none;
+      transition: color 0.2s;
     }
 
-    .dropdown-item-custom:hover {
-      background-color: #f8fafc;
+    .input-icon-group:focus-within .input-icon {
       color: #2c7da0;
     }
 
-    .dropdown-item-custom:hover i {
-      color: #2c7da0;
+    /* Select personalizado (zona horaria) */
+    .form-select-custom {
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 0.7rem 2rem 0.7rem 2.8rem;
+      font-size: 0.9rem;
+      background-color: #ffffff;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237e8c9e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
     }
 
-    .dropdown-divider-custom {
-      margin: 0.4rem 0;
-      border-top: 1px solid #eef2f8;
+    .form-select-custom:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
+      outline: none;
     }
 
-    /* Botón hamburguesa personalizado para móvil */
-    .navbar-toggler-custom {
+    /* Botón de registro */
+    .btn-register {
+      background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);
       border: none;
-      padding: 0.5rem 0.75rem;
-      border-radius: 12px;
-      color: #2c7da0;
-    }
-
-    .navbar-toggler-custom:focus {
-      box-shadow: none;
-      background-color: #f1f5f9;
-    }
-
-    /* Ajustes responsive: centrado en desktop, alineado en colapso */
-    @media (max-width: 991.98px) {
-      .navbar-minimal {
-        padding: 0.7rem 1rem;
-      }
-      .navbar-nav-center {
-        margin-top: 0.8rem;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.3rem;
-      }
-      .nav-link-custom {
-        text-align: center;
-        width: 100%;
-      }
-      .user-dropdown-toggle .user-name {
-        display: none;
-      }
-      .dropdown-menu-custom {
-        position: absolute !important;
-        right: 0;
-        left: auto !important;
-      }
-    }
-
-    /* Contenido de ejemplo para visualizar el navbar en contexto */
-    .hero-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      padding: 5rem 1.5rem;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .hero-title {
+      padding: 0.75rem;
       font-weight: 600;
-      font-size: 2rem;
-      background: linear-gradient(to right, #1e2a3a, #2c7da0);
-      background-clip: text;
-      -webkit-background-clip: text;
-      color: transparent;
-      letter-spacing: -0.02em;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.2s;
+      color: white;
+      width: 100%;
+      margin-top: 0.5rem;
     }
 
-    .hero-text {
-      color: #4b5565;
-      margin-top: 1rem;
+    .btn-register:hover {
+      background: linear-gradient(95deg, #184f6b 0%, #236b8c 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(28, 95, 120, 0.2);
     }
 
-    .card-demo {
-      background: white;
-      border-radius: 32px;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
-      border: 1px solid #edf2f7;
-      padding: 2rem;
+    .btn-register:active {
+      transform: translateY(1px);
+    }
+
+    /* Enlace a login */
+    .login-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: #5b6e8c;
+    }
+
+    .login-link a {
+      color: #2c7da0;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .login-link a:hover {
+      color: #0f4b65;
+      text-decoration: underline;
+    }
+
+    /* Divisor suave */
+    .divider-light {
+      margin: 0.5rem 0 0.8rem;
+      height: 1px;
+      background: #edf2f7;
+    }
+
+    /* Fila de dos columnas (nombres/apellidos) */
+    .row-gap-sm {
+      gap: 1rem;
+    }
+
+    @media (max-width: 480px) {
+      .register-card {
+        padding: 1.5rem;
+      }
+      .register-title {
+        font-size: 1.6rem;
+      }
     }
   </style>
 </head>
 <body>
 
-<!-- Navbar minimalista: izquierda (icono + trade mirror) | centro (opciones) | derecha (dropdown usuario) -->
-<nav class="navbar navbar-expand-lg navbar-minimal">
-  <div class="container-fluid px-0 px-lg-2">
-    
-    <!-- Logo / izquierda -->
-    <a class="navbar-brand-custom" href="#">
-      <span class="brand-icon">
-        <i class="bi bi-mirror"></i>
-      </span>
-      <span class="brand-text">trade mirror</span>
-    </a>
+<div class="register-card">
+  <div class="register-header">
+    <div class="brand-icon-small">
+      <i class="bi bi-mirror"></i>
+    </div>
+    <h1 class="register-title">Crear cuenta</h1>
+    <div class="register-sub">trade mirror · acceso unificado</div>
+  </div>
 
-    <!-- Botón hamburguesa (responsive) -->
-    <button class="navbar-toggler navbar-toggler-custom" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCenteredContent" aria-controls="navbarCenteredContent" aria-expanded="false" aria-label="Toggle navigation">
-      <i class="bi bi-list" style="font-size: 1.6rem;"></i>
-    </button>
-
-    <!-- Contenido colapsable: aquí se agrupan las opciones centradas y el dropdown de usuario (en desktop, el dropdown se posiciona a la derecha) -->
-    <div class="collapse navbar-collapse" id="navbarCenteredContent">
-      
-      <!-- Opciones centradas (flex-grow-1 para empujar a los lados, pero con margen automático) -->
-      <div class="navbar-nav mx-auto navbar-nav-center">
-        <a class="nav-link nav-link-custom active" aria-current="page" href="#"><i class="bi bi-house-door-fill me-1"></i> Inicio</a>
-        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-graph-up me-1"></i> Dashboard</a>
-        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-currency-exchange me-1"></i> Mercados</a>
-        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-bell me-1"></i> Alertas</a>
-        <a class="nav-link nav-link-custom" href="#"><i class="bi bi-question-circle me-1"></i> Recursos</a>
+  <form id="registerForm" action="#" method="post">
+    <!-- Fila de Nombres y Apellidos (2 columnas) -->
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="input-icon-group">
+          <i class="bi bi-person input-icon"></i>
+          <input type="text" class="form-control form-control-custom" id="nombres" placeholder="Nombres" required>
+        </div>
       </div>
-      
-      <!-- Elemento a la derecha: menú desplegable de usuario -->
-      <div class="d-flex ms-lg-3 mt-3 mt-lg-0">
-        <div class="dropdown">
-          <button class="user-dropdown-toggle dropdown-toggle" type="button" id="userDropdownButton" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="bi bi-person-circle user-icon"></i>
-            <span class="user-name">Alex M.</span>
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end dropdown-menu-custom" aria-labelledby="userDropdownButton">
-            <li>
-              <a class="dropdown-item dropdown-item-custom" href="#">
-                <i class="bi bi-person-badge"></i> Mi perfil
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item dropdown-item-custom" href="#">
-                <i class="bi bi-gear"></i> Configuración
-              </a>
-            </li>
-            <li>
-              <a class="dropdown-item dropdown-item-custom" href="#">
-                <i class="bi bi-shield-lock"></i> Seguridad
-              </a>
-            </li>
-            <li><hr class="dropdown-divider dropdown-divider-custom"></li>
-            <li>
-              <a class="dropdown-item dropdown-item-custom" href="#">
-                <i class="bi bi-box-arrow-right"></i> Cerrar sesión
-              </a>
-            </li>
-          </ul>
+      <div class="col-md-6">
+        <div class="input-icon-group">
+          <i class="bi bi-person-badge input-icon"></i>
+          <input type="text" class="form-control form-control-custom" id="apellidos" placeholder="Apellidos" required>
         </div>
       </div>
     </div>
-  </div>
-</nav>
 
-<!-- Contenido de muestra (para apreciar el navbar en contexto) -->
-<main class="container mt-5 pt-3">
-  <div class="hero-section card-demo">
-    <i class="bi bi-mirror" style="font-size: 3rem; color: #2c7da0; background: #eef6fc; padding: 0.8rem; border-radius: 60px;"></i>
-    <h1 class="hero-title mt-4">Refleja tu estrategia</h1>
-    <p class="hero-text">
-      Interfaz limpia, navegación centrada. El navbar se adapta fluidamente a cualquier pantalla.<br>
-      <strong>Minimalista, elegante y funcional.</strong>
-    </p>
-    <div class="mt-3 d-flex gap-3">
-      <span class="badge bg-light text-dark p-2 px-3 rounded-pill"><i class="bi bi-mirror"></i> trade mirror</span>
-      <span class="badge bg-light text-dark p-2 px-3 rounded-pill"><i class="bi bi-person-circle"></i> Dropdown listo</span>
-    </div>
-  </div>
-  
-  <div class="row mt-5 g-4 text-center">
-    <div class="col-md-4">
-      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
-        <i class="bi bi-bar-chart-steps fs-2 text-primary"></i>
-        <h5 class="mt-2">Análisis en tiempo real</h5>
-        <small class="text-muted">Datos sincronizados al instante</small>
+    <!-- Nombre de usuario -->
+    <div class="form-group mt-3">
+      <div class="input-icon-group">
+        <i class="bi bi-at input-icon"></i>
+        <input type="text" class="form-control form-control-custom" id="username" placeholder="Nombre de usuario" required autocomplete="username">
       </div>
     </div>
-    <div class="col-md-4">
-      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
-        <i class="bi bi-archive fs-2 text-primary"></i>
-        <h5 class="mt-2">Cartera unificada</h5>
-        <small class="text-muted">Gestiona todo desde un solo lugar</small>
-      </div>
-    </div>
-    <div class="col-md-4">
-      <div class="p-3 bg-white rounded-4 shadow-sm border-0">
-        <i class="bi bi-shield-check fs-2 text-primary"></i>
-        <h5 class="mt-2">Seguridad avanzada</h5>
-        <small class="text-muted">Protección de primer nivel</small>
-      </div>
-    </div>
-  </div>
-</main>
 
-<!-- Bootstrap JS + Popper (necesario para el dropdown) -->
+    <!-- Correo electrónico -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-envelope input-icon"></i>
+        <input type="email" class="form-control form-control-custom" id="email" placeholder="Correo electrónico" required autocomplete="email">
+      </div>
+    </div>
+
+    <!-- Zona horaria (select) -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-clock-history input-icon"></i>
+        <select class="form-select form-select-custom" id="timezone" required>
+          <option value="" disabled selected>Selecciona tu zona horaria</option>
+          <option value="America/New_York">(UTC-5) Nueva York, Toronto</option>
+          <option value="America/Chicago">(UTC-6) Chicago, Ciudad de México</option>
+          <option value="America/Denver">(UTC-7) Denver, Salt Lake City</option>
+          <option value="America/Los_Angeles">(UTC-8) Los Ángeles, Vancouver</option>
+          <option value="America/Anchorage">(UTC-9) Anchorage</option>
+          <option value="America/Honolulu">(UTC-10) Honolulu</option>
+          <option value="America/Sao_Paulo">(UTC-3) São Paulo, Buenos Aires</option>
+          <option value="Europe/London">(UTC+0) Londres, Dublín</option>
+          <option value="Europe/Madrid">(UTC+1) Madrid, Berlín, París</option>
+          <option value="Europe/Istanbul">(UTC+3) Estambul, Moscú</option>
+          <option value="Asia/Dubai">(UTC+4) Dubái</option>
+          <option value="Asia/Kolkata">(UTC+5:30) Nueva Delhi</option>
+          <option value="Asia/Shanghai">(UTC+8) Pekín, Singapur</option>
+          <option value="Asia/Tokyo">(UTC+9) Tokio, Seúl</option>
+          <option value="Australia/Sydney">(UTC+11) Sídney</option>
+          <option value="Pacific/Auckland">(UTC+13) Auckland</option>
+          <option value="Etc/GMT+12">(UTC-12) Baker</option>
+          <option value="Etc/GMT-12">(UTC+12) Wellington</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="divider-light"></div>
+
+    <!-- Botón de registro -->
+    <button type="submit" class="btn btn-register">
+      <i class="bi bi-person-plus me-2"></i> Registrarse
+    </button>
+
+    <div class="login-link">
+      ¿Ya tienes cuenta? <a href="#" id="loginRedirect">Inicia sesión aquí</a>
+    </div>
+  </form>
+</div>
+
+<!-- Bootstrap JS + popper (para eventuales tooltips, solo estructura) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // Pequeña mejora UX: cierra el dropdown al hacer clic en enlaces (opcional)
-  document.querySelectorAll('.dropdown-item-custom').forEach(item => {
-    item.addEventListener('click', (e) => {
-      // Simular acción sin recargar completamente la demo
-      e.preventDefault();
-      const text = item.innerText.trim();
-      console.log(`Navbar: acción seleccionada → ${text}`);
-      // Mostrar un pequeño feedback sutil sin alertas intrusivas
-      const toastMsg = document.createElement('div');
-      toastMsg.innerText = `Demo: ${text}`;
-      toastMsg.style.position = 'fixed';
-      toastMsg.style.bottom = '20px';
-      toastMsg.style.left = '50%';
-      toastMsg.style.transform = 'translateX(-50%)';
-      toastMsg.style.backgroundColor = '#1e293b';
-      toastMsg.style.color = '#f1f5f9';
-      toastMsg.style.padding = '8px 18px';
-      toastMsg.style.borderRadius = '40px';
-      toastMsg.style.fontSize = '0.8rem';
-      toastMsg.style.zIndex = '9999';
-      toastMsg.style.backdropFilter = 'blur(8px)';
-      toastMsg.style.fontWeight = '500';
-      toastMsg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-      document.body.appendChild(toastMsg);
-      setTimeout(() => toastMsg.remove(), 1800);
-      // Cerrar dropdown automáticamente
-      const dropdown = bootstrap.Dropdown.getInstance(document.getElementById('userDropdownButton'));
-      if(dropdown) dropdown.hide();
-    });
-  });
+  (function() {
+    const form = document.getElementById('registerForm');
+    const nombresInput = document.getElementById('nombres');
+    const apellidosInput = document.getElementById('apellidos');
+    const usernameInput = document.getElementById('username');
+    const emailInput = document.getElementById('email');
+    const timezoneSelect = document.getElementById('timezone');
+    const loginRedirectBtn = document.getElementById('loginRedirect');
 
-  // Opcional: resaltar enlace activo según scroll (solo efecto visual)
-  const navLinks = document.querySelectorAll('.nav-link-custom');
-  navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
+    // Función para mostrar notificaciones sutiles (toast flotante minimalista)
+    function showMessage(message, type = 'info') {
+      // Eliminar notificación previa si existe
+      const existingToast = document.querySelector('.floating-toast-register');
+      if (existingToast) existingToast.remove();
+
+      const toastDiv = document.createElement('div');
+      toastDiv.className = `floating-toast-register alert alert-${type === 'success' ? 'success' : 'info'} shadow-lg`;
+      toastDiv.role = 'alert';
+      toastDiv.style.position = 'fixed';
+      toastDiv.style.bottom = '24px';
+      toastDiv.style.left = '50%';
+      toastDiv.style.transform = 'translateX(-50%)';
+      toastDiv.style.zIndex = '9999';
+      toastDiv.style.minWidth = '260px';
+      toastDiv.style.maxWidth = '90vw';
+      toastDiv.style.textAlign = 'center';
+      toastDiv.style.backdropFilter = 'blur(12px)';
+      toastDiv.style.backgroundColor = type === 'success' ? '#e2f3e4' : '#fff3e0';
+      toastDiv.style.borderLeft = type === 'success' ? '4px solid #2c7da0' : '4px solid #e6a017';
+      toastDiv.style.borderRadius = '20px';
+      toastDiv.style.padding = '0.7rem 1rem';
+      toastDiv.style.fontSize = '0.85rem';
+      toastDiv.style.fontWeight = '500';
+      toastDiv.style.color = '#1e2a3a';
+      toastDiv.style.fontFamily = 'system-ui, sans-serif';
+
+      const icon = type === 'success' ? '<i class="bi bi-check-circle-fill me-2" style="color:#2c7da0;"></i>' : '<i class="bi bi-info-circle-fill me-2" style="color:#e6a017;"></i>';
+      toastDiv.innerHTML = `${icon} ${message}`;
+      document.body.appendChild(toastDiv);
+
+      setTimeout(() => {
+        if (toastDiv && toastDiv.parentNode) toastDiv.remove();
+      }, 2800);
+    }
+
+    // Validación simple y envío simulado (demo)
+    form.addEventListener('submit', function(e) {
       e.preventDefault();
-      navLinks.forEach(l => l.classList.remove('active'));
-      this.classList.add('active');
+
+      // Obtener valores
+      const nombres = nombresInput.value.trim();
+      const apellidos = apellidosInput.value.trim();
+      const username = usernameInput.value.trim();
+      const email = emailInput.value.trim();
+      const timezone = timezoneSelect.value;
+
+      // Validaciones
+      if (nombres === "") {
+        showMessage("Por favor ingresa tu(s) nombre(s).", "warning");
+        nombresInput.focus();
+        return;
+      }
+      if (apellidos === "") {
+        showMessage("Ingresa tus apellidos.", "warning");
+        apellidosInput.focus();
+        return;
+      }
+      if (username === "") {
+        showMessage("El nombre de usuario es obligatorio.", "warning");
+        usernameInput.focus();
+        return;
+      }
+      if (email === "") {
+        showMessage("Correo electrónico requerido.", "warning");
+        emailInput.focus();
+        return;
+      }
+      if (!email.includes('@') || !email.includes('.')) {
+        showMessage("Ingresa un correo válido (ejemplo@dominio.com).", "warning");
+        emailInput.focus();
+        return;
+      }
+      if (!timezone) {
+        showMessage("Selecciona tu zona horaria para continuar.", "warning");
+        timezoneSelect.focus();
+        return;
+      }
+
+      // Simular registro exitoso (demo)
+      showMessage(`¡Bienvenido, ${username}! Tu cuenta ha sido creada.`, "success");
+      
+      // Opcional: limpiar campos o resetear formulario (solo demostración)
+      // Aquí podrías redirigir a login, pero por UX se deja mensaje
+      setTimeout(() => {
+        // Reset simulando éxito (no limpiamos completamente para que vea el feedback)
+        // En un entorno real se redirige o limpia.
+        console.log("Registro demo completado - Datos:", { nombres, apellidos, username, email, timezone });
+        // Opcional: reiniciar formulario si se desea (comentado)
+        // form.reset();
+      }, 500);
     });
-  });
+
+    // Enlace "Inicia sesión aquí" simula redirección a página de login (demo)
+    if (loginRedirectBtn) {
+      loginRedirectBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        showMessage("Demo: redirigiendo al área de inicio de sesión...", "info");
+        // Simulación de cambio de página o recarga (solo efecto)
+        setTimeout(() => {
+          // Aquí podrías cambiar location.href si tuvieras login.html
+          // window.location.href = 'login.html';
+        }, 800);
+      });
+    }
+
+    // Pequeño efecto: placeholder dinámico en zona horaria (mejora UX)
+    timezoneSelect.addEventListener('change', function() {
+      if (this.value) {
+        this.style.color = '#1e293b';
+      }
+    });
+  })();
 </script>
 </body>
 </html>

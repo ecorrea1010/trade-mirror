@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}Registro | Trade Mirror{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="d-flex align-items-center justify-content-center py-5">
+<div class="register-card">
+  <div class="register-header">
+    <div class="brand-icon-small">
+      <i class="bi bi-person-add"></i>
+    </div>
+    <h1 class="register-title">Crear cuenta</h1>
+    <div class="register-sub">registro de usuarios</div>
+  </div>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }} mb-3" role="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <form id="registerForm" method="POST" action="{{ url_for('auth.register') }}">
+    {{ form.hidden_tag() }}
+
+    <!-- Nombres y Apellidos -->
+    <div class="row g-3">
+      <div class="col-md-6">
+        <div class="input-icon-group">
+          <i class="bi bi-person input-icon"></i>
+          {{ form.first_name(class="form-control form-control-custom", placeholder="Nombres") }}
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="input-icon-group">
+          <i class="bi bi-person-badge input-icon"></i>
+          {{ form.last_name(class="form-control form-control-custom", placeholder="Apellidos") }}
+        </div>
+      </div>
+    </div>
+
+    <!-- Username -->
+    <div class="form-group mt-3">
+      <div class="input-icon-group">
+        <i class="bi bi-at input-icon"></i>
+        {{ form.username(class="form-control form-control-custom", placeholder="Nombre de usuario") }}
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-envelope input-icon"></i>
+        {{ form.email(class="form-control form-control-custom", placeholder="Correo electrónico") }}
+      </div>
+    </div>
+
+    <!-- Zona horaria -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-clock-history input-icon"></i>
+        {{ form.timezone(class="form-select form-select-custom") }}
+      </div>
+    </div>
+
+    <div class="divider-light"></div>
+
+    <!-- Contraseña -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-lock input-icon"></i>
+        {{ form.password(class="form-control form-control-custom", placeholder="Contraseña") }}
+      </div>
+    </div>
+
+    <!-- Repetir contraseña -->
+    <div class="form-group">
+      <div class="input-icon-group">
+        <i class="bi bi-lock-fill input-icon"></i>
+        {{ form.confirm_password(class="form-control form-control-custom", placeholder="Repetir contraseña") }}
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-register">
+      <i class="bi bi-person-plus me-2"></i> Registrarse
+    </button>
+
+    <div class="login-link">
+      ¿Ya tienes cuenta? <a href="{{ url_for('auth.login') }}">Inicia sesión aquí</a>
+    </div>
+  </form>
+</div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/register.js') }}"></script>
+{% endblock %}

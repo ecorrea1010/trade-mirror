@@ -1,0 +1,31 @@
+services:
+  trade_mirror_app:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      - FLASK_DEBUG=1 # Habilita el modo de desarrollo para recarga automática
+    depends_on:
+      trade_mirror_db:
+        condition: service_healthy
+
+  trade_mirror_db:
+    image: postgres:16-alpine
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
