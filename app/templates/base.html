@@ -22,7 +22,9 @@
 
       <a class="navbar-brand-custom" href="{{ url_for('trades.dashboard') }}">
         <span class="brand-icon">
-          <i class="bi bi-mirror"></i>
+          <img src="{{ url_for('static', filename='icons/icon_tm.png') }}"
+             alt="Trade Mirror"
+             style="width: 48px; height: 48px; object-fit: contain;">
         </span>
         <span class="brand-text">trade mirror</span>
       </a>
@@ -41,19 +43,16 @@
       <div class="collapse navbar-collapse" id="navbarCenteredContent">
         <div class="navbar-nav mx-auto navbar-nav-center">
           <a class="nav-link nav-link-custom" href="{{ url_for('trades.dashboard') }}">
-            <i class="bi bi-house-door-fill me-1"></i> Inicio
-          </a>
-          <a class="nav-link nav-link-custom" href="#">
             <i class="bi bi-graph-up me-1"></i> Dashboard
           </a>
-          <a class="nav-link nav-link-custom" href="#">
-            <i class="bi bi-currency-exchange me-1"></i> Mercados
+          <a class="nav-link nav-link-custom" href="{{ url_for('trades.history') }}">
+            <i class="bi bi-journal-plus me-1"></i> Operaciones
           </a>
           <a class="nav-link nav-link-custom" href="#">
-            <i class="bi bi-bell me-1"></i> Alertas
+            <i class="bi bi-lightbulb me-1"></i> Reflexiones
           </a>
           <a class="nav-link nav-link-custom" href="#">
-            <i class="bi bi-question-circle me-1"></i> Recursos
+            <i class="bi bi-graph-up-arrow me-1"></i> Análisis
           </a>
         </div>
 

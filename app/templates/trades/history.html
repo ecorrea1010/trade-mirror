@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block title %}Historial de Trades | Trade Mirror{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/trades_history.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="trade-container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div class="page-title">
+      <h1><i class="bi bi-clock-history me-2" style="color:#2c7da0;"></i> Historial de Trades</h1>
+      <p>Historial de todas tus operaciones registradas</p>
+    </div>
+    <a href="#" class="btn-register-trade">
+      <i class="bi bi-plus-lg"></i> Registrar operación
+    </a>
+  </div>
+
+  <!-- Filtros y búsqueda -->
+  <div class="filters-section">
+    <div class="search-wrapper">
+      <div class="search-input-group input-icon-search">
+        <label>Buscar por par o tipo</label>
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" class="search-field"
+               placeholder="EUR/USD, BTC, compra, venta..." autocomplete="off">
+      </div>
+      <div>
+        <label style="visibility: hidden;">Limpiar</label>
+        <button id="clearSearchBtn" class="btn-clear-search">
+          <i class="bi bi-x-circle me-1"></i>Limpiar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="table-wrapper">
+    <table class="trade-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Par</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Precio (USD)</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tradeTableBody">
+        <tr class="empty-row">
+          <td colspan="7">No hay operaciones registradas aún.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginador -->
+  <div class="pagination-wrapper">
+    <div class="pagination-info" id="paginationInfo"></div>
+    <div class="pagination-buttons" id="paginationButtons"></div>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+  <script src="{{ url_for('static', filename='js/trades_history.js') }}"></script>
+{% endblock %}

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Registro | Trade Mirror</title>
+  <title>Historial de Trades | Trade Mirror</title>
   <!-- Bootstrap 5 CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -16,408 +16,602 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-      background: linear-gradient(145deg, #f4f7fc 0%, #eef2f8 100%);
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: #f4f7fc;
       padding: 2rem 1.5rem;
     }
 
-    /* Tarjeta principal del formulario - minimalista, elegante */
-    .register-card {
-      max-width: 560px;
-      width: 100%;
+    /* Contenedor principal con max-width elegante */
+    .trade-container {
+      max-width: 1400px;
+      margin: 0 auto;
       background: #ffffff;
-      border-radius: 36px;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
-      padding: 2rem 2rem 2.2rem;
-      transition: all 0.2s ease;
-      border: 1px solid rgba(226, 232, 240, 0.7);
+      border-radius: 32px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 1.8rem 2rem 2rem;
+      transition: all 0.2s;
+      border: 1px solid rgba(226, 232, 240, 0.6);
     }
 
-    /* Encabezado */
-    .register-header {
-      text-align: center;
-      margin-bottom: 1.8rem;
-    }
-
-    .brand-icon-small {
-      background: rgba(44, 125, 160, 0.08);
-      width: 56px;
-      height: 56px;
-      display: inline-flex;
+    /* Header con título y botón alineado */
+    .page-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
       align-items: center;
-      justify-content: center;
-      border-radius: 28px;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
+      gap: 1rem;
     }
 
-    .brand-icon-small i {
-      font-size: 2rem;
-      color: #2c7da0;
-    }
-
-    .register-title {
-      font-weight: 650;
+    .page-title h1 {
       font-size: 1.8rem;
+      font-weight: 650;
       letter-spacing: -0.3px;
       background: linear-gradient(135deg, #1f5e7e, #2c7da0);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin-bottom: 0.3rem;
+      margin: 0;
     }
 
-    .register-sub {
+    .page-title p {
       color: #5b6e8c;
       font-size: 0.85rem;
+      margin: 0;
       border-left: 2px solid #2c7da0;
-      padding-left: 0.75rem;
-      display: inline-block;
+      padding-left: 0.65rem;
       margin-top: 0.25rem;
     }
 
-    /* Campos de formulario minimalistas */
-    .form-group {
-      margin-bottom: 1.3rem;
-    }
-
-    .input-icon-group {
-      position: relative;
-    }
-
-    .input-icon-group .form-control-custom {
-      padding-left: 2.8rem;
-    }
-
-    .form-control-custom {
-      width: 100%;
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 0.7rem 1rem;
-      font-size: 0.9rem;
-      background-color: #ffffff;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
-    }
-
-    .form-control-custom:focus {
-      border-color: #2c7da0;
-      box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
-      outline: none;
-    }
-
-    .input-icon {
-      position: absolute;
-      left: 1rem;
-      top: 50%;
-      transform: translateY(-50%);
-      color: #8e9eae;
-      font-size: 1.1rem;
-      pointer-events: none;
-      transition: color 0.2s;
-    }
-
-    .input-icon-group:focus-within .input-icon {
-      color: #2c7da0;
-    }
-
-    /* Select personalizado (zona horaria) */
-    .form-select-custom {
-      border: 1px solid #e2e8f0;
-      border-radius: 18px;
-      padding: 0.7rem 2rem 0.7rem 2.8rem;
-      font-size: 0.9rem;
-      background-color: #ffffff;
-      appearance: none;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237e8c9e' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-      background-repeat: no-repeat;
-      background-position: right 1rem center;
-    }
-
-    .form-select-custom:focus {
-      border-color: #2c7da0;
-      box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
-      outline: none;
-    }
-
-    /* Botón de registro */
-    .btn-register {
+    /* Botón registrar operación (gradiente consistente) */
+    .btn-register-trade {
       background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);
       border: none;
-      padding: 0.75rem;
-      font-weight: 600;
+      padding: 0.65rem 1.4rem;
+      font-weight: 500;
       border-radius: 40px;
-      font-size: 0.95rem;
-      transition: transform 0.15s, box-shadow 0.2s;
+      font-size: 0.9rem;
+      transition: all 0.2s ease;
       color: white;
-      width: 100%;
-      margin-top: 0.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
     }
 
-    .btn-register:hover {
+    .btn-register-trade:hover {
       background: linear-gradient(95deg, #184f6b 0%, #236b8c 100%);
       transform: translateY(-1px);
-      box-shadow: 0 8px 20px rgba(28, 95, 120, 0.2);
+      box-shadow: 0 8px 18px rgba(28, 95, 120, 0.2);
     }
 
-    .btn-register:active {
-      transform: translateY(1px);
+    /* Layout de dos columnas: izquierda búsqueda + filtros, derecha vacía (solo para estructura) */
+    .filters-section {
+      background: #f9fafc;
+      border-radius: 24px;
+      padding: 1.2rem 1.2rem;
+      margin-bottom: 1.8rem;
+      border: 1px solid #eef2f6;
     }
 
-    /* Enlace a login */
-    .login-link {
-      text-align: center;
-      margin-top: 1.5rem;
-      font-size: 0.85rem;
-      color: #5b6e8c;
-    }
-
-    .login-link a {
-      color: #2c7da0;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-
-    .login-link a:hover {
-      color: #0f4b65;
-      text-decoration: underline;
-    }
-
-    /* Divisor suave */
-    .divider-light {
-      margin: 0.5rem 0 0.8rem;
-      height: 1px;
-      background: #edf2f7;
-    }
-
-    /* Fila de dos columnas (nombres/apellidos) */
-    .row-gap-sm {
+    .search-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
       gap: 1rem;
     }
 
-    @media (max-width: 480px) {
-      .register-card {
-        padding: 1.5rem;
+    .search-input-group {
+      flex: 2;
+      min-width: 180px;
+    }
+
+    .search-input-group label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: #5b6e8c;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .search-field {
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 0.6rem 1rem 0.6rem 2.4rem;
+      font-size: 0.85rem;
+      width: 100%;
+      background: white;
+      transition: all 0.2s;
+    }
+
+    .search-field:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.12);
+      outline: none;
+    }
+
+    .input-icon-search {
+      position: relative;
+    }
+
+    .input-icon-search i {
+      position: absolute;
+      left: 0.8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #8e9eae;
+      font-size: 1rem;
+      pointer-events: none;
+    }
+
+    .btn-clear-search {
+      background: transparent;
+      border: 1px solid #e2e8f0;
+      border-radius: 40px;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      color: #5b6e8c;
+      transition: all 0.15s;
+    }
+
+    .btn-clear-search:hover {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    /* Tabla minimalista y elegante */
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 24px;
+      background: white;
+    }
+
+    .trade-table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 0.85rem;
+    }
+
+    .trade-table thead th {
+      background: #f8fafd;
+      color: #2c3e50;
+      font-weight: 600;
+      padding: 1rem 1rem;
+      border-bottom: 1px solid #eef2f8;
+      white-space: nowrap;
+    }
+
+    .trade-table tbody td {
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid #f0f4f9;
+      color: #1f2a3e;
+      vertical-align: middle;
+    }
+
+    .trade-table tbody tr:hover {
+      background-color: #fafcff;
+      transition: 0.1s;
+    }
+
+    /* Badges de tipo y estado */
+    .badge-buy {
+      background: #e0f2e9;
+      color: #1e7b5c;
+      font-weight: 500;
+      padding: 0.25rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+    }
+
+    .badge-sell {
+      background: #ffe8e6;
+      color: #b34a3c;
+      font-weight: 500;
+      padding: 0.25rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+    }
+
+    .status-completed {
+      color: #2c7da0;
+      background: #e9f4f8;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .status-pending {
+      background: #fff1e0;
+      color: #cc8b2c;
+      padding: 0.2rem 0.7rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+    }
+
+    /* Paginador minimalista */
+    .pagination-wrapper {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+    }
+
+    .pagination-info {
+      font-size: 0.8rem;
+      color: #5b6e8c;
+    }
+
+    .pagination-buttons {
+      display: flex;
+      gap: 0.3rem;
+      flex-wrap: wrap;
+    }
+
+    .page-btn {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 30px;
+      padding: 0.35rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #334155;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+
+    .page-btn.active-page {
+      background: #2c7da0;
+      border-color: #2c7da0;
+      color: white;
+    }
+
+    .page-btn:hover:not(.active-page) {
+      background: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .page-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Empty state */
+    .empty-row td {
+      text-align: center;
+      padding: 2rem;
+      color: #98aec5;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem;
       }
-      .register-title {
-        font-size: 1.6rem;
+      .trade-container {
+        padding: 1.2rem;
+      }
+      .page-header {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .btn-register-trade {
+        justify-content: center;
+      }
+      .filters-section {
+        padding: 1rem;
+      }
+      .search-wrapper {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .pagination-wrapper {
+        justify-content: center;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="register-card">
-  <div class="register-header">
-    <div class="brand-icon-small">
-      <i class="bi bi-mirror"></i>
+<div class="trade-container">
+  
+  <!-- Header con título + botón -->
+  <div class="page-header">
+    <div class="page-title">
+      <h1><i class="bi bi-clock-history me-2" style="color:#2c7da0;"></i> Historial de Trades</h1>
+      <p>Registro de operaciones · rendimiento y tracking</p>
     </div>
-    <h1 class="register-title">Crear cuenta</h1>
-    <div class="register-sub">trade mirror · acceso unificado</div>
+    <button class="btn-register-trade" id="openRegisterModalBtn">
+      <i class="bi bi-plus-lg"></i> Registrar operación
+    </button>
   </div>
 
-  <form id="registerForm" action="#" method="post">
-    <!-- Fila de Nombres y Apellidos (2 columnas) -->
-    <div class="row g-3">
-      <div class="col-md-6">
-        <div class="input-icon-group">
-          <i class="bi bi-person input-icon"></i>
-          <input type="text" class="form-control form-control-custom" id="nombres" placeholder="Nombres" required>
-        </div>
+  <!-- Sección de búsqueda y filtros (lateral izquierdo conceptual) -->
+  <div class="filters-section">
+    <div class="search-wrapper">
+      <div class="search-input-group input-icon-search">
+        <label>Buscar por par o tipo</label>
+        <i class="bi bi-search"></i>
+        <input type="text" id="searchInput" class="search-field" placeholder="EUR/USD, BTC, compra, venta..." autocomplete="off">
       </div>
-      <div class="col-md-6">
-        <div class="input-icon-group">
-          <i class="bi bi-person-badge input-icon"></i>
-          <input type="text" class="form-control form-control-custom" id="apellidos" placeholder="Apellidos" required>
-        </div>
+      <div>
+        <label style="visibility: hidden;">Limpiar</label>
+        <button id="clearSearchBtn" class="btn-clear-search"><i class="bi bi-x-circle me-1"></i>Limpiar</button>
       </div>
     </div>
+  </div>
 
-    <!-- Nombre de usuario -->
-    <div class="form-group mt-3">
-      <div class="input-icon-group">
-        <i class="bi bi-at input-icon"></i>
-        <input type="text" class="form-control form-control-custom" id="username" placeholder="Nombre de usuario" required autocomplete="username">
-      </div>
+  <!-- Tabla de operaciones -->
+  <div class="table-wrapper">
+    <table class="trade-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Par</th>
+          <th>Tipo</th>
+          <th>Cantidad</th>
+          <th>Precio (USD)</th>
+          <th>Fecha</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+      <tbody id="tradeTableBody">
+        <!-- Filas dinámicas con JS -->
+        <tr class="empty-row"><td colspan="7">Cargando operaciones...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Paginador -->
+  <div class="pagination-wrapper">
+    <div class="pagination-info" id="paginationInfo">
+      Mostrando 0 - 0 de 0
     </div>
-
-    <!-- Correo electrónico -->
-    <div class="form-group">
-      <div class="input-icon-group">
-        <i class="bi bi-envelope input-icon"></i>
-        <input type="email" class="form-control form-control-custom" id="email" placeholder="Correo electrónico" required autocomplete="email">
-      </div>
+    <div class="pagination-buttons" id="paginationButtons">
+      <!-- botones generados dinámicamente -->
     </div>
-
-    <!-- Zona horaria (select) -->
-    <div class="form-group">
-      <div class="input-icon-group">
-        <i class="bi bi-clock-history input-icon"></i>
-        <select class="form-select form-select-custom" id="timezone" required>
-          <option value="" disabled selected>Selecciona tu zona horaria</option>
-          <option value="America/New_York">(UTC-5) Nueva York, Toronto</option>
-          <option value="America/Chicago">(UTC-6) Chicago, Ciudad de México</option>
-          <option value="America/Denver">(UTC-7) Denver, Salt Lake City</option>
-          <option value="America/Los_Angeles">(UTC-8) Los Ángeles, Vancouver</option>
-          <option value="America/Anchorage">(UTC-9) Anchorage</option>
-          <option value="America/Honolulu">(UTC-10) Honolulu</option>
-          <option value="America/Sao_Paulo">(UTC-3) São Paulo, Buenos Aires</option>
-          <option value="Europe/London">(UTC+0) Londres, Dublín</option>
-          <option value="Europe/Madrid">(UTC+1) Madrid, Berlín, París</option>
-          <option value="Europe/Istanbul">(UTC+3) Estambul, Moscú</option>
-          <option value="Asia/Dubai">(UTC+4) Dubái</option>
-          <option value="Asia/Kolkata">(UTC+5:30) Nueva Delhi</option>
-          <option value="Asia/Shanghai">(UTC+8) Pekín, Singapur</option>
-          <option value="Asia/Tokyo">(UTC+9) Tokio, Seúl</option>
-          <option value="Australia/Sydney">(UTC+11) Sídney</option>
-          <option value="Pacific/Auckland">(UTC+13) Auckland</option>
-          <option value="Etc/GMT+12">(UTC-12) Baker</option>
-          <option value="Etc/GMT-12">(UTC+12) Wellington</option>
-        </select>
-      </div>
-    </div>
-
-    <div class="divider-light"></div>
-
-    <!-- Botón de registro -->
-    <button type="submit" class="btn btn-register">
-      <i class="bi bi-person-plus me-2"></i> Registrarse
-    </button>
-
-    <div class="login-link">
-      ¿Ya tienes cuenta? <a href="#" id="loginRedirect">Inicia sesión aquí</a>
-    </div>
-  </form>
+  </div>
 </div>
 
-<!-- Bootstrap JS + popper (para eventuales tooltips, solo estructura) -->
+<!-- Modal demo para "Registrar operación" (sutil, minimalista) -->
+<div class="modal fade" id="registerTradeModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content" style="border-radius: 28px; border: none; box-shadow: 0 25px 40px -12px rgba(0,0,0,0.2);">
+      <div class="modal-header border-0 pt-4 px-4">
+        <h5 class="modal-title" id="registerModalLabel" style="font-weight: 600; color: #1f5e7e;"><i class="bi bi-plus-circle me-2"></i>Nueva operación</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body px-4 pb-3">
+        <p class="text-muted" style="font-size: 0.9rem;">Demo: Esta funcionalidad abriría un formulario para registrar una operación real.<br> 
+        En este prototipo, se integra con el historial simulado.</p>
+        <div class="alert alert-info py-2" style="background: #eef6fc; border: none; border-radius: 16px;">
+          <i class="bi bi-info-circle"></i> Los datos de ejemplo se actualizarían al registrar.
+        </div>
+        <button class="btn btn-register-trade w-100 mt-2" id="demoAddTradeBtn" style="background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);">Simular registro</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  (function() {
-    const form = document.getElementById('registerForm');
-    const nombresInput = document.getElementById('nombres');
-    const apellidosInput = document.getElementById('apellidos');
-    const usernameInput = document.getElementById('username');
-    const emailInput = document.getElementById('email');
-    const timezoneSelect = document.getElementById('timezone');
-    const loginRedirectBtn = document.getElementById('loginRedirect');
+  // ---------- DATOS MOCK DE TRADES (historial) ----------
+  const mockTrades = [
+    { id: 1001, pair: "BTC/USD", type: "compra", quantity: 0.085, price: 43250.00, date: "2025-02-18 10:32", status: "completado" },
+    { id: 1002, pair: "ETH/USD", type: "venta", quantity: 1.25, price: 2850.75, date: "2025-02-17 14:15", status: "completado" },
+    { id: 1003, pair: "EUR/USD", type: "compra", quantity: 5000, price: 1.0892, date: "2025-02-16 09:45", status: "completado" },
+    { id: 1004, pair: "SOL/USD", type: "venta", quantity: 45, price: 98.40, date: "2025-02-15 22:10", status: "pendiente" },
+    { id: 1005, pair: "ADA/USD", type: "compra", quantity: 1200, price: 0.34, date: "2025-02-14 17:20", status: "completado" },
+    { id: 1006, pair: "DOGE/USD", type: "compra", quantity: 3500, price: 0.082, date: "2025-02-13 11:05", status: "completado" },
+    { id: 1007, pair: "BTC/USD", type: "venta", quantity: 0.042, price: 44100.00, date: "2025-02-12 08:30", status: "completado" },
+    { id: 1008, pair: "ETH/USD", type: "compra", quantity: 0.95, price: 2790.20, date: "2025-02-11 19:55", status: "completado" },
+    { id: 1009, pair: "XRP/USD", type: "venta", quantity: 2100, price: 0.52, date: "2025-02-10 13:12", status: "completado" },
+    { id: 1010, pair: "LINK/USD", type: "compra", quantity: 80, price: 14.75, date: "2025-02-09 16:40", status: "pendiente" },
+    { id: 1011, pair: "EUR/USD", type: "venta", quantity: 2500, price: 1.0945, date: "2025-02-08 10:15", status: "completado" },
+    { id: 1012, pair: "BTC/USD", type: "compra", quantity: 0.12, price: 42800.00, date: "2025-02-07 12:00", status: "completado" },
+    { id: 1013, pair: "SOL/USD", type: "compra", quantity: 30, price: 95.20, date: "2025-02-06 09:30", status: "completado" },
+    { id: 1014, pair: "MATIC/USD", type: "venta", quantity: 600, price: 0.89, date: "2025-02-05 23:20", status: "completado" },
+    { id: 1015, pair: "AVAX/USD", type: "compra", quantity: 25, price: 32.10, date: "2025-02-04 14:45", status: "completado" },
+    { id: 1016, pair: "DOT/USD", type: "venta", quantity: 110, price: 6.85, date: "2025-02-03 11:30", status: "pendiente" },
+    { id: 1017, pair: "UNI/USD", type: "compra", quantity: 45, price: 7.20, date: "2025-02-02 18:10", status: "completado" },
+    { id: 1018, pair: "BTC/USD", type: "venta", quantity: 0.025, price: 43560.00, date: "2025-02-01 20:55", status: "completado" },
+    { id: 1019, pair: "ETH/USD", type: "compra", quantity: 0.5, price: 2720.00, date: "2025-01-31 08:00", status: "completado" },
+    { id: 1020, pair: "ADA/USD", type: "venta", quantity: 800, price: 0.33, date: "2025-01-30 12:25", status: "completado" }
+  ];
 
-    // Función para mostrar notificaciones sutiles (toast flotante minimalista)
-    function showMessage(message, type = 'info') {
-      // Eliminar notificación previa si existe
-      const existingToast = document.querySelector('.floating-toast-register');
-      if (existingToast) existingToast.remove();
+  // Configuración de paginación
+  const rowsPerPage = 6;   // 6 registros por página (tabla limpia)
+  let currentPage = 1;
+  let filteredTrades = [...mockTrades];
+  let searchTerm = "";
 
-      const toastDiv = document.createElement('div');
-      toastDiv.className = `floating-toast-register alert alert-${type === 'success' ? 'success' : 'info'} shadow-lg`;
-      toastDiv.role = 'alert';
-      toastDiv.style.position = 'fixed';
-      toastDiv.style.bottom = '24px';
-      toastDiv.style.left = '50%';
-      toastDiv.style.transform = 'translateX(-50%)';
-      toastDiv.style.zIndex = '9999';
-      toastDiv.style.minWidth = '260px';
-      toastDiv.style.maxWidth = '90vw';
-      toastDiv.style.textAlign = 'center';
-      toastDiv.style.backdropFilter = 'blur(12px)';
-      toastDiv.style.backgroundColor = type === 'success' ? '#e2f3e4' : '#fff3e0';
-      toastDiv.style.borderLeft = type === 'success' ? '4px solid #2c7da0' : '4px solid #e6a017';
-      toastDiv.style.borderRadius = '20px';
-      toastDiv.style.padding = '0.7rem 1rem';
-      toastDiv.style.fontSize = '0.85rem';
-      toastDiv.style.fontWeight = '500';
-      toastDiv.style.color = '#1e2a3a';
-      toastDiv.style.fontFamily = 'system-ui, sans-serif';
+  // Referencias DOM
+  const tbody = document.getElementById("tradeTableBody");
+  const paginationInfo = document.getElementById("paginationInfo");
+  const paginationButtons = document.getElementById("paginationButtons");
+  const searchInput = document.getElementById("searchInput");
+  const clearSearchBtn = document.getElementById("clearSearchBtn");
 
-      const icon = type === 'success' ? '<i class="bi bi-check-circle-fill me-2" style="color:#2c7da0;"></i>' : '<i class="bi bi-info-circle-fill me-2" style="color:#e6a017;"></i>';
-      toastDiv.innerHTML = `${icon} ${message}`;
-      document.body.appendChild(toastDiv);
-
-      setTimeout(() => {
-        if (toastDiv && toastDiv.parentNode) toastDiv.remove();
-      }, 2800);
+  // Función para filtrar según búsqueda (par o tipo)
+  function applySearchFilter() {
+    const term = searchTerm.trim().toLowerCase();
+    if (term === "") {
+      filteredTrades = [...mockTrades];
+    } else {
+      filteredTrades = mockTrades.filter(trade => 
+        trade.pair.toLowerCase().includes(term) || 
+        trade.type.toLowerCase().includes(term)
+      );
     }
+    currentPage = 1;
+    renderTableAndPagination();
+  }
 
-    // Validación simple y envío simulado (demo)
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      // Obtener valores
-      const nombres = nombresInput.value.trim();
-      const apellidos = apellidosInput.value.trim();
-      const username = usernameInput.value.trim();
-      const email = emailInput.value.trim();
-      const timezone = timezoneSelect.value;
-
-      // Validaciones
-      if (nombres === "") {
-        showMessage("Por favor ingresa tu(s) nombre(s).", "warning");
-        nombresInput.focus();
-        return;
-      }
-      if (apellidos === "") {
-        showMessage("Ingresa tus apellidos.", "warning");
-        apellidosInput.focus();
-        return;
-      }
-      if (username === "") {
-        showMessage("El nombre de usuario es obligatorio.", "warning");
-        usernameInput.focus();
-        return;
-      }
-      if (email === "") {
-        showMessage("Correo electrónico requerido.", "warning");
-        emailInput.focus();
-        return;
-      }
-      if (!email.includes('@') || !email.includes('.')) {
-        showMessage("Ingresa un correo válido (ejemplo@dominio.com).", "warning");
-        emailInput.focus();
-        return;
-      }
-      if (!timezone) {
-        showMessage("Selecciona tu zona horaria para continuar.", "warning");
-        timezoneSelect.focus();
-        return;
-      }
-
-      // Simular registro exitoso (demo)
-      showMessage(`¡Bienvenido, ${username}! Tu cuenta ha sido creada.`, "success");
-      
-      // Opcional: limpiar campos o resetear formulario (solo demostración)
-      // Aquí podrías redirigir a login, pero por UX se deja mensaje
-      setTimeout(() => {
-        // Reset simulando éxito (no limpiamos completamente para que vea el feedback)
-        // En un entorno real se redirige o limpia.
-        console.log("Registro demo completado - Datos:", { nombres, apellidos, username, email, timezone });
-        // Opcional: reiniciar formulario si se desea (comentado)
-        // form.reset();
-      }, 500);
-    });
-
-    // Enlace "Inicia sesión aquí" simula redirección a página de login (demo)
-    if (loginRedirectBtn) {
-      loginRedirectBtn.addEventListener('click', function(e) {
-        e.preventDefault();
-        showMessage("Demo: redirigiendo al área de inicio de sesión...", "info");
-        // Simulación de cambio de página o recarga (solo efecto)
-        setTimeout(() => {
-          // Aquí podrías cambiar location.href si tuvieras login.html
-          // window.location.href = 'login.html';
-        }, 800);
+  // Función para renderizar la tabla con paginación y filtros
+  function renderTableAndPagination() {
+    const totalRows = filteredTrades.length;
+    const totalPages = Math.ceil(totalRows / rowsPerPage);
+    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+    
+    const startIdx = (currentPage - 1) * rowsPerPage;
+    const endIdx = startIdx + rowsPerPage;
+    const pageRows = filteredTrades.slice(startIdx, endIdx);
+    
+    // Renderizar tabla
+    if (pageRows.length === 0) {
+      tbody.innerHTML = `<tr class="empty-row"><td colspan="7">No se encontraron operaciones. <i class="bi bi-emoji-neutral"></i></td></tr>`;
+    } else {
+      tbody.innerHTML = pageRows.map(trade => {
+        const tipoBadge = trade.type === 'compra' 
+          ? '<span class="badge-buy"><i class="bi bi-arrow-up-short"></i> Compra</span>' 
+          : '<span class="badge-sell"><i class="bi bi-arrow-down-short"></i> Venta</span>';
+        const statusBadge = trade.status === 'completado' 
+          ? '<span class="status-completed"><i class="bi bi-check-circle-fill me-1"></i> Completado</span>' 
+          : '<span class="status-pending"><i class="bi bi-hourglass-split me-1"></i> Pendiente</span>';
+        // Formato cantidad: si es crypto pequeño muestra decimales, si no, entero
+        let quantityFormatted = trade.quantity;
+        if (trade.quantity % 1 !== 0) quantityFormatted = trade.quantity.toFixed(4);
+        else quantityFormatted = trade.quantity;
+        
+        return `<tr>
+          <td><span class="fw-semibold" style="color:#2c7da0;">${trade.id}</span></td>
+          <td><strong>${trade.pair}</strong></td>
+          <td>${tipoBadge}</td>
+          <td>${quantityFormatted}</td>
+          <td>$${trade.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+          <td>${trade.date}</td>
+          <td>${statusBadge}</td>
+        </tr>`;
+      }).join('');
+    }
+    
+    // Actualizar info de paginación
+    const startCount = totalRows === 0 ? 0 : startIdx + 1;
+    const endCount = Math.min(endIdx, totalRows);
+    paginationInfo.innerText = `Mostrando ${startCount} - ${endCount} de ${totalRows} operaciones`;
+    
+    // Generar botones de paginación
+    renderPaginationButtons(totalPages);
+  }
+  
+  function renderPaginationButtons(totalPages) {
+    if (totalPages <= 1) {
+      paginationButtons.innerHTML = '';
+      return;
+    }
+    let buttonsHtml = '';
+    // Botón anterior
+    buttonsHtml += `<button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''}><i class="bi bi-chevron-left"></i></button>`;
+    
+    // Números de página (máximo 5 visibles para minimalismo)
+    let startPage = Math.max(1, currentPage - 2);
+    let endPage = Math.min(totalPages, currentPage + 2);
+    if (endPage - startPage < 4) {
+      if (startPage === 1) endPage = Math.min(totalPages, startPage + 4);
+      else if (endPage === totalPages) startPage = Math.max(1, endPage - 4);
+    }
+    for (let i = startPage; i <= endPage; i++) {
+      buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
+    }
+    
+    // Botón siguiente
+    buttonsHtml += `<button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled' : ''}><i class="bi bi-chevron-right"></i></button>`;
+    paginationButtons.innerHTML = buttonsHtml;
+    
+    // Añadir event listeners a los botones
+    document.querySelectorAll('.page-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const pageVal = btn.getAttribute('data-page');
+        if (pageVal === 'prev' && currentPage > 1) {
+          currentPage--;
+          renderTableAndPagination();
+        } else if (pageVal === 'next' && currentPage < totalPages) {
+          currentPage++;
+          renderTableAndPagination();
+        } else if (!isNaN(parseInt(pageVal))) {
+          currentPage = parseInt(pageVal);
+          renderTableAndPagination();
+        }
       });
-    }
-
-    // Pequeño efecto: placeholder dinámico en zona horaria (mejora UX)
-    timezoneSelect.addEventListener('change', function() {
-      if (this.value) {
-        this.style.color = '#1e293b';
-      }
     });
-  })();
+  }
+  
+  // Evento de búsqueda en tiempo real
+  function handleSearch() {
+    searchTerm = searchInput.value;
+    applySearchFilter();
+  }
+  
+  searchInput.addEventListener('input', handleSearch);
+  clearSearchBtn.addEventListener('click', () => {
+    searchInput.value = '';
+    searchTerm = '';
+    applySearchFilter();
+  });
+  
+  // Modal y agregar operación simulada (demo)
+  const modalElement = document.getElementById('registerTradeModal');
+  const registerModal = new bootstrap.Modal(modalElement);
+  const openModalBtn = document.getElementById('openRegisterModalBtn');
+  const demoAddBtn = document.getElementById('demoAddTradeBtn');
+  
+  openModalBtn.addEventListener('click', () => {
+    registerModal.show();
+  });
+  
+  // Simular agregar una nueva operación (actualiza tabla, reinicia búsqueda)
+  demoAddBtn.addEventListener('click', () => {
+    const newId = Math.max(...mockTrades.map(t => t.id)) + 1;
+    const now = new Date();
+    const formattedDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+    const randomType = Math.random() > 0.5 ? 'compra' : 'venta';
+    const randomPair = ['BTC/USD','ETH/USD','EUR/USD','SOL/USD','ADA/USD'][Math.floor(Math.random()*5)];
+    const randomQty = (Math.random() * 1.5).toFixed(4);
+    const randomPrice = (Math.random() * 40000 + 500).toFixed(2);
+    const newTrade = {
+      id: newId,
+      pair: randomPair,
+      type: randomType,
+      quantity: parseFloat(randomQty),
+      price: parseFloat(randomPrice),
+      date: formattedDate,
+      status: "completado"
+    };
+    mockTrades.unshift(newTrade);   // agregar al inicio del array original
+    // Resetear filtro de búsqueda para mostrar el nuevo elemento
+    searchInput.value = '';
+    searchTerm = '';
+    applySearchFilter();  // esto reasigna filteredTrades y re-renderiza
+    registerModal.hide();
+    // Pequeño feedback sutil (sin alertas pesadas)
+    const toastMsg = document.createElement('div');
+    toastMsg.innerText = `✅ Nueva operación registrada: ${newTrade.pair} (${newTrade.type})`;
+    toastMsg.style.position = 'fixed';
+    toastMsg.style.bottom = '20px';
+    toastMsg.style.left = '50%';
+    toastMsg.style.transform = 'translateX(-50%)';
+    toastMsg.style.backgroundColor = '#1e293b';
+    toastMsg.style.color = '#f1f5f9';
+    toastMsg.style.padding = '10px 20px';
+    toastMsg.style.borderRadius = '40px';
+    toastMsg.style.fontSize = '0.8rem';
+    toastMsg.style.zIndex = '9999';
+    toastMsg.style.backdropFilter = 'blur(8px)';
+    toastMsg.style.fontWeight = '500';
+    toastMsg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
+    document.body.appendChild(toastMsg);
+    setTimeout(() => toastMsg.remove(), 2000);
+  });
+  
+  // Inicializar tabla
+  renderTableAndPagination();
 </script>
 </body>
 </html>
