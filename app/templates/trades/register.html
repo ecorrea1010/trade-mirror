@@ -1,0 +1,280 @@
+{% extends "base.html" %}
+
+{% block title %}Registrar Operación | Trade Mirror{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/trades_register.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="register-wrapper">
+  <div class="register-card">
+
+    <!-- Header -->
+    <div class="register-header">
+      <div class="brand-icon">
+        <i class="bi bi-clipboard-data-fill"></i>
+      </div>
+      <h1 class="register-title">Registrar operación</h1>
+      <span class="register-sub">trade mirror · registro completo de trades</span>
+    </div>
+
+    <form id="tradeForm" method="post" action="#" novalidate>
+
+      <!-- ─── SECCIÓN 1 · Datos esenciales ─── -->
+      <div class="form-section">
+        <div class="section-label">
+          <i class="bi bi-info-circle-fill"></i> Datos esenciales
+        </div>
+        <div class="row g-3">
+
+          <!-- Primera línea: Fecha · Activo · Estrategia -->
+          <div class="col-md-4">
+            <label class="field-label" for="opened_at">Fecha y hora <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="bi bi-calendar-event field-icon"></i>
+              <input type="datetime-local" class="field-input" id="opened_at" name="opened_at" required>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="field-label" for="symbol">Par / Activo <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="bi bi-currency-exchange field-icon"></i>
+              <select class="field-select" id="symbol" name="symbol" required>
+                <option value="" disabled selected>Seleccionar activo…</option>
+                <optgroup label="Criptomonedas">
+                  <option value="BTC/USDT">BTC/USDT · Bitcoin</option>
+                  <option value="ETH/USDT">ETH/USDT · Ethereum</option>
+                  <option value="SOL/USDT">SOL/USDT · Solana</option>
+                  <option value="ADA/USDT">ADA/USDT · Cardano</option>
+                  <option value="DOGE/USDT">DOGE/USDT · Dogecoin</option>
+                  <option value="XRP/USDT">XRP/USDT · Ripple</option>
+                  <option value="LINK/USDT">LINK/USDT · Chainlink</option>
+                  <option value="MATIC/USDT">MATIC/USDT · Polygon</option>
+                </optgroup>
+                <optgroup label="Forex">
+                  <option value="EUR/USD">EUR/USD</option>
+                  <option value="GBP/USD">GBP/USD</option>
+                  <option value="USD/JPY">USD/JPY</option>
+                </optgroup>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="field-label" for="strategy_id">Estrategia</label>
+            <div class="input-wrap">
+              <i class="bi bi-bar-chart-steps field-icon"></i>
+              <select class="field-select" id="strategy_id" name="strategy_id">
+                <option value="">Sin estrategia asignada</option>
+                {% for s in strategies %}
+                <option value="{{ s.id }}">{{ s.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+
+          <!-- Segunda línea: Dirección · Clasificación -->
+          <div class="col-md-6">
+            <label class="field-label">Dirección <span class="req">*</span></label>
+            <div class="direction-group" id="directionGroup">
+              <label class="dir-btn" id="buyBtn">
+                <input type="radio" name="direction" value="BUY">
+                <i class="bi bi-arrow-up-short"></i> Compra
+              </label>
+              <label class="dir-btn" id="sellBtn">
+                <input type="radio" name="direction" value="SELL">
+                <i class="bi bi-arrow-down-short"></i> Venta
+              </label>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="field-label" for="classification">Clasificación</label>
+            <div class="input-wrap">
+              <i class="bi bi-bookmark field-icon"></i>
+              <select class="field-select" id="classification" name="classification">
+                <option value="">Sin clasificar (abierta)</option>
+                <option value="win">Ganancia</option>
+                <option value="loss">Pérdida</option>
+                <option value="breakeven">Break-even</option>
+              </select>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── SECCIÓN 2 · Cantidades y precios ─── -->
+      <div class="form-section">
+        <div class="section-label">
+          <i class="bi bi-calculator-fill"></i> Cantidades y precios
+        </div>
+        <div class="row g-3">
+
+          <!-- Primera fila: Tamaño del lote · Precio entrada · Stop Loss -->
+          <div class="col-md-4">
+            <label class="field-label" for="quantity">Tamaño del lote <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="bi bi-database field-icon"></i>
+              <input type="number" step="any" min="0" class="field-input" id="quantity" name="quantity" placeholder="0.00" required>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="field-label" for="entry_price">Precio entrada <span class="req">*</span></label>
+            <div class="input-wrap">
+              <i class="bi bi-tag field-icon"></i>
+              <input type="number" step="any" min="0" class="field-input" id="entry_price" name="entry_price" placeholder="0.00" required>
+              <span class="field-suffix">USD</span>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <label class="field-label" for="stop_loss">Stop Loss</label>
+            <div class="input-wrap">
+              <i class="bi bi-arrow-down-circle field-icon"></i>
+              <input type="number" step="any" min="0" class="field-input sl-field" id="stop_loss" name="stop_loss" placeholder="0.00">
+            </div>
+          </div>
+
+          <!-- Segunda fila: Take Profit · Salida -->
+          <div class="col-md-6">
+            <label class="field-label" for="take_profit">Take Profit</label>
+            <div class="input-wrap">
+              <i class="bi bi-arrow-up-circle field-icon"></i>
+              <input type="number" step="any" min="0" class="field-input tp-field" id="take_profit" name="take_profit" placeholder="0.00">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="field-label" for="exit_price">Salida</label>
+            <div class="input-wrap">
+              <i class="bi bi-flag field-icon"></i>
+              <input type="number" step="any" min="0" class="field-input" id="exit_price" name="exit_price" placeholder="0.00">
+              <span class="field-suffix">USD</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── SECCIÓN 3 · Resultados (Gestión de riesgo) ─── -->
+      <div class="form-section">
+        <div class="section-label">
+          <i class="bi bi-shield-fill-check"></i> Resultados
+        </div>
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="field-label" for="result">Pérdida / Ganancia</label>
+            <div class="input-wrap">
+              <i class="bi bi-graph-down-up field-icon"></i>
+              <select class="field-select" id="result" name="result">
+                <option value="">Sin registrar</option>
+                <option value="win">Ganancia</option>
+                <option value="loss">Pérdida</option>
+                <option value="breakeven">Break-even</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label class="field-label" for="rr_ratio">Ratio R:R</label>
+            <div class="input-wrap">
+              <i class="bi bi-calculator field-icon"></i>
+              <input type="number" step="0.01" min="0" class="field-input" id="rr_ratio" name="rr_ratio" placeholder="1.00">
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── SECCIÓN 4 · Contexto y clasificación ─── -->
+      <div class="form-section">
+        <div class="section-label">
+          <i class="bi bi-geo-alt-fill"></i> Contexto
+        </div>
+        <div class="row g-3">
+
+          <div class="col-md-6">
+            <label class="field-label" for="image_url">URL imagen</label>
+            <div class="input-wrap">
+              <i class="bi bi-image field-icon"></i>
+              <input type="url" class="field-input" id="image_url" name="image_url" placeholder="https://...">
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="field-label">Etiquetas</label>
+            <div class="tags-input-wrap" id="tagsWrap">
+              <div class="tags-list" id="tagsList"></div>
+              <input type="text" class="tags-input" id="tagsInput" placeholder="Escribe y presiona Enter…" autocomplete="off">
+              <input type="hidden" id="tagsHidden" name="tags">
+            </div>
+            <p class="field-hint">Ej: scalping · swing · rompimiento · reacción-soporte</p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── SECCIÓN 5 · Estado emocional y notas ─── -->
+      <div class="form-section" style="border-bottom: none; margin-bottom: 0;">
+        <div class="section-label">
+          <i class="bi bi-chat-dots-fill"></i> Estado emocional y notas
+        </div>
+        <div class="row g-3">
+
+          <div class="col-12">
+            <label class="field-label">Emociones al ejecutar</label>
+            <div class="emotions-grid" id="emotionsGrid">
+              {% set emotion_list = [
+                ('confiado','bi-emoji-smile','positive'),
+                ('ansioso','bi-emoji-expressionless','negative'),
+                ('paciente','bi-hourglass-split','positive'),
+                ('impulsivo','bi-lightning-charge','negative'),
+                ('enfocado','bi-bullseye','positive'),
+                ('dudoso','bi-question-circle','negative'),
+                ('neutral','bi-dash-circle','neutral'),
+                ('eufórico','bi-stars','negative'),
+              ] %}
+              {% for name, icon, tone in emotion_list %}
+              <label class="emotion-chip tone-{{ tone }}">
+                <input type="checkbox" name="emotions" value="{{ name }}">
+                <i class="bi {{ icon }}"></i> {{ name }}
+              </label>
+              {% endfor %}
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label class="field-label" for="notes">Notas y análisis</label>
+            <div class="input-wrap align-items-start">
+              <i class="bi bi-pencil-square field-icon" style="top: 1.1rem; transform: none;"></i>
+              <textarea class="field-input field-textarea" id="notes" name="notes" rows="4"
+                placeholder="Describe tu análisis, contexto del mercado, qué viste en el gráfico, por qué entraste…"></textarea>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ─── Acciones ─── -->
+      <div class="form-actions">
+        <a href="{{ url_for('trades.history') }}" class="btn-ghost">
+          <i class="bi bi-arrow-left"></i> Volver al historial
+        </a>
+        <button type="submit" class="btn-primary-action">
+          <i class="bi bi-save2-fill"></i> Registrar operación
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/trades_register.js') }}"></script>
+{% endblock %}

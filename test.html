@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Historial de Trades | Trade Mirror</title>
+  <title>Registro de Operación | Trade Mirror</title>
   <!-- Bootstrap 5 CSS + Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -16,602 +16,594 @@
 
     body {
       font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, sans-serif;
-      background: #f4f7fc;
+      background: linear-gradient(145deg, #f4f7fc 0%, #eef2f8 100%);
+      min-height: 100vh;
       padding: 2rem 1.5rem;
     }
 
-    /* Contenedor principal con max-width elegante */
-    .trade-container {
-      max-width: 1400px;
+    /* Contenedor principal más ancho para muchos campos */
+    .register-trade-card {
+      max-width: 1100px;
+      width: 100%;
       margin: 0 auto;
       background: #ffffff;
-      border-radius: 32px;
-      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.02);
-      padding: 1.8rem 2rem 2rem;
-      transition: all 0.2s;
-      border: 1px solid rgba(226, 232, 240, 0.6);
+      border-radius: 36px;
+      box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.02);
+      padding: 2rem 2rem 2.2rem;
+      transition: all 0.2s ease;
+      border: 1px solid rgba(226, 232, 240, 0.7);
     }
 
-    /* Header con título y botón alineado */
-    .page-header {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
+    /* Encabezado */
+    .register-header {
+      text-align: center;
+      margin-bottom: 1.8rem;
+    }
+
+    .brand-icon-small {
+      background: rgba(44, 125, 160, 0.08);
+      width: 56px;
+      height: 56px;
+      display: inline-flex;
       align-items: center;
-      margin-bottom: 2rem;
-      gap: 1rem;
+      justify-content: center;
+      border-radius: 28px;
+      margin-bottom: 1rem;
     }
 
-    .page-title h1 {
-      font-size: 1.8rem;
+    .brand-icon-small i {
+      font-size: 2rem;
+      color: #2c7da0;
+    }
+
+    .register-title {
       font-weight: 650;
+      font-size: 1.8rem;
       letter-spacing: -0.3px;
       background: linear-gradient(135deg, #1f5e7e, #2c7da0);
       background-clip: text;
       -webkit-background-clip: text;
       color: transparent;
-      margin: 0;
+      margin-bottom: 0.3rem;
     }
 
-    .page-title p {
+    .register-sub {
       color: #5b6e8c;
       font-size: 0.85rem;
-      margin: 0;
       border-left: 2px solid #2c7da0;
-      padding-left: 0.65rem;
+      padding-left: 0.75rem;
+      display: inline-block;
       margin-top: 0.25rem;
     }
 
-    /* Botón registrar operación (gradiente consistente) */
-    .btn-register-trade {
-      background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);
-      border: none;
-      padding: 0.65rem 1.4rem;
-      font-weight: 500;
-      border-radius: 40px;
-      font-size: 0.9rem;
-      transition: all 0.2s ease;
-      color: white;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.02);
-    }
-
-    .btn-register-trade:hover {
-      background: linear-gradient(95deg, #184f6b 0%, #236b8c 100%);
-      transform: translateY(-1px);
-      box-shadow: 0 8px 18px rgba(28, 95, 120, 0.2);
-    }
-
-    /* Layout de dos columnas: izquierda búsqueda + filtros, derecha vacía (solo para estructura) */
-    .filters-section {
-      background: #f9fafc;
-      border-radius: 24px;
-      padding: 1.2rem 1.2rem;
+    /* Secciones internas */
+    .form-section {
       margin-bottom: 1.8rem;
-      border: 1px solid #eef2f6;
+      border-bottom: 1px solid #edf2f7;
+      padding-bottom: 1rem;
     }
 
-    .search-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: flex-end;
-      gap: 1rem;
-    }
-
-    .search-input-group {
-      flex: 2;
-      min-width: 180px;
-    }
-
-    .search-input-group label {
-      font-size: 0.75rem;
-      font-weight: 500;
+    .section-title {
+      font-size: 0.85rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
-      color: #5b6e8c;
-      margin-bottom: 0.3rem;
-      display: block;
+      color: #2c7da0;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    .search-field {
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      padding: 0.6rem 1rem 0.6rem 2.4rem;
-      font-size: 0.85rem;
-      width: 100%;
-      background: white;
-      transition: all 0.2s;
+    .section-title i {
+      font-size: 1rem;
     }
 
-    .search-field:focus {
-      border-color: #2c7da0;
-      box-shadow: 0 0 0 3px rgba(44, 125, 160, 0.12);
-      outline: none;
+    /* Campos minimalistas */
+    .form-group {
+      margin-bottom: 1.2rem;
     }
 
-    .input-icon-search {
+    .input-icon-group {
       position: relative;
     }
 
-    .input-icon-search i {
+    .input-icon-group .form-control-custom,
+    .input-icon-group .form-select-custom {
+      padding-left: 2.8rem;
+    }
+
+    .form-control-custom, .form-select-custom {
+      width: 100%;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      font-size: 0.9rem;
+      background-color: #ffffff;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .form-control-custom:focus, .form-select-custom:focus {
+      border-color: #2c7da0;
+      box-shadow: 0 0 0 4px rgba(44, 125, 160, 0.12);
+      outline: none;
+    }
+
+    .input-icon {
       position: absolute;
-      left: 0.8rem;
+      left: 1rem;
       top: 50%;
       transform: translateY(-50%);
       color: #8e9eae;
-      font-size: 1rem;
+      font-size: 1.1rem;
       pointer-events: none;
+      transition: color 0.2s;
     }
 
-    .btn-clear-search {
-      background: transparent;
-      border: 1px solid #e2e8f0;
-      border-radius: 40px;
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
-      color: #5b6e8c;
-      transition: all 0.15s;
-    }
-
-    .btn-clear-search:hover {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
-    }
-
-    /* Tabla minimalista y elegante */
-    .table-wrapper {
-      overflow-x: auto;
-      border-radius: 24px;
-      background: white;
-    }
-
-    .trade-table {
-      width: 100%;
-      border-collapse: separate;
-      border-spacing: 0;
-      font-size: 0.85rem;
-    }
-
-    .trade-table thead th {
-      background: #f8fafd;
-      color: #2c3e50;
-      font-weight: 600;
-      padding: 1rem 1rem;
-      border-bottom: 1px solid #eef2f8;
-      white-space: nowrap;
-    }
-
-    .trade-table tbody td {
-      padding: 0.9rem 1rem;
-      border-bottom: 1px solid #f0f4f9;
-      color: #1f2a3e;
-      vertical-align: middle;
-    }
-
-    .trade-table tbody tr:hover {
-      background-color: #fafcff;
-      transition: 0.1s;
-    }
-
-    /* Badges de tipo y estado */
-    .badge-buy {
-      background: #e0f2e9;
-      color: #1e7b5c;
-      font-weight: 500;
-      padding: 0.25rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-    }
-
-    .badge-sell {
-      background: #ffe8e6;
-      color: #b34a3c;
-      font-weight: 500;
-      padding: 0.25rem 0.8rem;
-      border-radius: 40px;
-      font-size: 0.7rem;
-    }
-
-    .status-completed {
+    .input-icon-group:focus-within .input-icon {
       color: #2c7da0;
-      background: #e9f4f8;
-      padding: 0.2rem 0.7rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 500;
-      display: inline-block;
     }
 
-    .status-pending {
-      background: #fff1e0;
-      color: #cc8b2c;
-      padding: 0.2rem 0.7rem;
-      border-radius: 30px;
-      font-size: 0.7rem;
-      font-weight: 500;
-    }
-
-    /* Paginador minimalista */
-    .pagination-wrapper {
-      margin-top: 2rem;
+    /* Radio group tipo operación */
+    .type-radio-group {
       display: flex;
-      justify-content: flex-end;
-      align-items: center;
+      gap: 1rem;
       flex-wrap: wrap;
-      gap: 0.8rem;
     }
 
-    .pagination-info {
-      font-size: 0.8rem;
+    .type-radio {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: 500;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      transition: all 0.2s;
+    }
+
+    .type-radio input {
+      accent-color: #2c7da0;
+      width: 1rem;
+      height: 1rem;
+      margin: 0;
+    }
+
+    .type-radio.selected-buy {
+      background: #e0f2e9;
+      border-color: #2c7da0;
+      color: #1e7b5c;
+    }
+
+    .type-radio.selected-sell {
+      background: #ffe8e6;
+      border-color: #b34a3c;
+      color: #b34a3c;
+    }
+
+    /* Botón principal */
+    .btn-register {
+      background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);
+      border: none;
+      padding: 0.8rem;
+      font-weight: 600;
+      border-radius: 40px;
+      font-size: 0.95rem;
+      transition: transform 0.15s, box-shadow 0.2s;
+      color: white;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    .btn-register:hover {
+      background: linear-gradient(95deg, #184f6b 0%, #236b8c 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 8px 20px rgba(28, 95, 120, 0.2);
+    }
+
+    /* Enlace a historial */
+    .history-link {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
       color: #5b6e8c;
     }
-
-    .pagination-buttons {
-      display: flex;
-      gap: 0.3rem;
-      flex-wrap: wrap;
-    }
-
-    .page-btn {
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 30px;
-      padding: 0.35rem 0.85rem;
-      font-size: 0.8rem;
+    .history-link a {
+      color: #2c7da0;
+      text-decoration: none;
       font-weight: 500;
-      color: #334155;
-      transition: all 0.15s;
-      cursor: pointer;
     }
-
-    .page-btn.active-page {
-      background: #2c7da0;
-      border-color: #2c7da0;
-      color: white;
-    }
-
-    .page-btn:hover:not(.active-page) {
-      background: #f1f5f9;
-      border-color: #cbd5e1;
-    }
-
-    .page-btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    /* Empty state */
-    .empty-row td {
-      text-align: center;
-      padding: 2rem;
-      color: #98aec5;
+    .history-link a:hover {
+      text-decoration: underline;
     }
 
     /* Responsive */
     @media (max-width: 768px) {
-      body {
-        padding: 1rem;
+      .register-trade-card {
+        padding: 1.5rem;
       }
-      .trade-container {
-        padding: 1.2rem;
-      }
-      .page-header {
+      .type-radio-group {
         flex-direction: column;
-        align-items: stretch;
-      }
-      .btn-register-trade {
-        justify-content: center;
-      }
-      .filters-section {
-        padding: 1rem;
-      }
-      .search-wrapper {
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .pagination-wrapper {
-        justify-content: center;
+        gap: 0.6rem;
       }
     }
   </style>
 </head>
 <body>
 
-<div class="trade-container">
-  
-  <!-- Header con título + botón -->
-  <div class="page-header">
-    <div class="page-title">
-      <h1><i class="bi bi-clock-history me-2" style="color:#2c7da0;"></i> Historial de Trades</h1>
-      <p>Registro de operaciones · rendimiento y tracking</p>
+<div class="register-trade-card">
+  <div class="register-header">
+    <div class="brand-icon-small">
+      <i class="bi bi-clipboard-data"></i>
     </div>
-    <button class="btn-register-trade" id="openRegisterModalBtn">
-      <i class="bi bi-plus-lg"></i> Registrar operación
-    </button>
+    <h1 class="register-title">Registrar operación</h1>
+    <div class="register-sub">trade mirror · registro completo de trades</div>
   </div>
 
-  <!-- Sección de búsqueda y filtros (lateral izquierdo conceptual) -->
-  <div class="filters-section">
-    <div class="search-wrapper">
-      <div class="search-input-group input-icon-search">
-        <label>Buscar por par o tipo</label>
-        <i class="bi bi-search"></i>
-        <input type="text" id="searchInput" class="search-field" placeholder="EUR/USD, BTC, compra, venta..." autocomplete="off">
-      </div>
-      <div>
-        <label style="visibility: hidden;">Limpiar</label>
-        <button id="clearSearchBtn" class="btn-clear-search"><i class="bi bi-x-circle me-1"></i>Limpiar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- Tabla de operaciones -->
-  <div class="table-wrapper">
-    <table class="trade-table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Par</th>
-          <th>Tipo</th>
-          <th>Cantidad</th>
-          <th>Precio (USD)</th>
-          <th>Fecha</th>
-          <th>Estado</th>
-        </tr>
-      </thead>
-      <tbody id="tradeTableBody">
-        <!-- Filas dinámicas con JS -->
-        <tr class="empty-row"><td colspan="7">Cargando operaciones...</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <!-- Paginador -->
-  <div class="pagination-wrapper">
-    <div class="pagination-info" id="paginationInfo">
-      Mostrando 0 - 0 de 0
-    </div>
-    <div class="pagination-buttons" id="paginationButtons">
-      <!-- botones generados dinámicamente -->
-    </div>
-  </div>
-</div>
-
-<!-- Modal demo para "Registrar operación" (sutil, minimalista) -->
-<div class="modal fade" id="registerTradeModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content" style="border-radius: 28px; border: none; box-shadow: 0 25px 40px -12px rgba(0,0,0,0.2);">
-      <div class="modal-header border-0 pt-4 px-4">
-        <h5 class="modal-title" id="registerModalLabel" style="font-weight: 600; color: #1f5e7e;"><i class="bi bi-plus-circle me-2"></i>Nueva operación</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body px-4 pb-3">
-        <p class="text-muted" style="font-size: 0.9rem;">Demo: Esta funcionalidad abriría un formulario para registrar una operación real.<br> 
-        En este prototipo, se integra con el historial simulado.</p>
-        <div class="alert alert-info py-2" style="background: #eef6fc; border: none; border-radius: 16px;">
-          <i class="bi bi-info-circle"></i> Los datos de ejemplo se actualizarían al registrar.
+  <form id="tradeForm" action="#" method="post">
+    
+    <!-- SECCIÓN 1: Datos esenciales -->
+    <div class="form-section">
+      <div class="section-title"><i class="bi bi-info-circle"></i> Datos esenciales</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-currency-exchange input-icon"></i>
+            <select class="form-select form-select-custom" id="pair" required>
+              <option value="" disabled selected>Par / Activo *</option>
+              <option value="BTC/USD">BTC/USD - Bitcoin</option>
+              <option value="ETH/USD">ETH/USD - Ethereum</option>
+              <option value="EUR/USD">EUR/USD - Euro/Dólar</option>
+              <option value="SOL/USD">SOL/USD - Solana</option>
+              <option value="ADA/USD">ADA/USD - Cardano</option>
+              <option value="DOGE/USD">DOGE/USD - Dogecoin</option>
+              <option value="XRP/USD">XRP/USD - Ripple</option>
+              <option value="LINK/USD">LINK/USD - Chainlink</option>
+              <option value="MATIC/USD">MATIC/USD - Polygon</option>
+            </select>
+          </div>
         </div>
-        <button class="btn btn-register-trade w-100 mt-2" id="demoAddTradeBtn" style="background: linear-gradient(95deg, #1f5e7e 0%, #2c7da0 100%);">Simular registro</button>
+        <div class="col-md-6">
+          <div class="form-group mb-0">
+            <label style="font-size: 0.75rem; font-weight: 500; color: #5b6e8c; margin-bottom: 0.3rem;">Tipo de operación *</label>
+            <div class="type-radio-group" id="typeGroup">
+              <label class="type-radio" id="buyLabel">
+                <input type="radio" name="tradeType" value="compra" checked> <i class="bi bi-arrow-up-short"></i> Compra
+              </label>
+              <label class="type-radio" id="sellLabel">
+                <input type="radio" name="tradeType" value="venta"> <i class="bi bi-arrow-down-short"></i> Venta
+              </label>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+
+    <!-- SECCIÓN 2: Cantidades y precios (campos numéricos) -->
+    <div class="form-section">
+      <div class="section-title"><i class="bi bi-calculator"></i> Cantidades y precios</div>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="input-icon-group">
+            <i class="bi bi-database input-icon"></i>
+            <input type="number" step="any" class="form-control form-control-custom" id="quantity" placeholder="Cantidad *" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-icon-group">
+            <i class="bi bi-tag input-icon"></i>
+            <input type="number" step="any" class="form-control form-control-custom" id="entryPrice" placeholder="Precio entrada (USD) *" required>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="input-icon-group">
+            <i class="bi bi-flag input-icon"></i>
+            <input type="number" step="any" class="form-control form-control-custom" id="exitPrice" placeholder="Precio salida (opcional)">
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-percent input-icon"></i>
+            <input type="number" step="0.01" class="form-control form-control-custom" id="commission" placeholder="Comisión (%) o monto fijo">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-arrow-left-right input-icon"></i>
+            <input type="number" step="0.01" class="form-control form-control-custom" id="slippage" placeholder="Slippage permitido (%)">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 3: Gestión de riesgos (Take Profit / Stop Loss) -->
+    <div class="form-section">
+      <div class="section-title"><i class="bi bi-shield-shaded"></i> Gestión de riesgos</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-arrow-up-circle input-icon"></i>
+            <input type="number" step="any" class="form-control form-control-custom" id="takeProfit" placeholder="Take Profit (precio)">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-arrow-down-circle input-icon"></i>
+            <input type="number" step="any" class="form-control form-control-custom" id="stopLoss" placeholder="Stop Loss (precio)">
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-graph-up input-icon"></i>
+            <input type="number" step="0.1" class="form-control form-control-custom" id="leverage" placeholder="Apalancamiento (ej: 1, 2, 5...)" value="1">
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-clock input-icon"></i>
+            <select class="form-select form-select-custom" id="orderType">
+              <option value="market">Market (ejecución inmediata)</option>
+              <option value="limit">Limit (orden límite)</option>
+              <option value="stop">Stop (stop market)</option>
+              <option value="stop_limit">Stop limit</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 4: Información adicional y contexto -->
+    <div class="form-section">
+      <div class="section-title"><i class="bi bi-geo-alt"></i> Contexto y plataforma</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-building input-icon"></i>
+            <select class="form-select form-select-custom" id="platform">
+              <option value="" disabled selected>Plataforma / Broker *</option>
+              <option value="Binance">Binance</option>
+              <option value="Coinbase">Coinbase</option>
+              <option value="Kraken">Kraken</option>
+              <option value="Bybit">Bybit</option>
+              <option value="FTX (demo)">FTX (demo)</option>
+              <option value="Interactive Brokers">Interactive Brokers</option>
+              <option value="Otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-tags input-icon"></i>
+            <input type="text" class="form-control form-control-custom" id="tags" placeholder="Etiquetas (scalping, swing, etc)">
+          </div>
+        </div>
+      </div>
+      <div class="row g-3 mt-1">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-calendar-event input-icon"></i>
+            <input type="datetime-local" class="form-control form-control-custom" id="tradeDate" required>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-bar-chart-steps input-icon"></i>
+            <select class="form-select form-select-custom" id="strategy">
+              <option value="" disabled selected>Estrategia utilizada</option>
+              <option value="Trend following">Trend following</option>
+              <option value="Scalping">Scalping</option>
+              <option value="Swing trading">Swing trading</option>
+              <option value="Arbitraje">Arbitraje</option>
+              <option value="Martingala">Martingala</option>
+              <option value="Grid trading">Grid trading</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECCIÓN 5: Estado y notas -->
+    <div class="form-section">
+      <div class="section-title"><i class="bi bi-chat-dots"></i> Estado y observaciones</div>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-check-circle input-icon"></i>
+            <select class="form-select form-select-custom" id="tradeStatus">
+              <option value="abierta">Abierta</option>
+              <option value="cerrada_ganancia">Cerrada (ganancia)</option>
+              <option value="cerrada_perdida">Cerrada (pérdida)</option>
+              <option value="pendiente">Pendiente de ejecución</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-icon-group">
+            <i class="bi bi-emoji-smile input-icon"></i>
+            <input type="text" class="form-control form-control-custom" id="sentiment" placeholder="Sentimiento (alcista / bajista / neutral)">
+          </div>
+        </div>
+      </div>
+      <div class="form-group mt-2">
+        <div class="input-icon-group">
+          <i class="bi bi-pencil-square input-icon" style="top: 1.2rem;"></i>
+          <textarea class="form-control form-control-custom" id="notes" rows="3" placeholder="Notas adicionales, análisis, contexto de la operación..."></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Botón de envío -->
+    <button type="submit" class="btn btn-register">
+      <i class="bi bi-save2 me-2"></i> Registrar operación
+    </button>
+
+    <div class="history-link">
+      <i class="bi bi-arrow-return-left me-1"></i> <a href="#" id="backToHistory">Volver al historial de trades</a>
+    </div>
+  </form>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-  // ---------- DATOS MOCK DE TRADES (historial) ----------
-  const mockTrades = [
-    { id: 1001, pair: "BTC/USD", type: "compra", quantity: 0.085, price: 43250.00, date: "2025-02-18 10:32", status: "completado" },
-    { id: 1002, pair: "ETH/USD", type: "venta", quantity: 1.25, price: 2850.75, date: "2025-02-17 14:15", status: "completado" },
-    { id: 1003, pair: "EUR/USD", type: "compra", quantity: 5000, price: 1.0892, date: "2025-02-16 09:45", status: "completado" },
-    { id: 1004, pair: "SOL/USD", type: "venta", quantity: 45, price: 98.40, date: "2025-02-15 22:10", status: "pendiente" },
-    { id: 1005, pair: "ADA/USD", type: "compra", quantity: 1200, price: 0.34, date: "2025-02-14 17:20", status: "completado" },
-    { id: 1006, pair: "DOGE/USD", type: "compra", quantity: 3500, price: 0.082, date: "2025-02-13 11:05", status: "completado" },
-    { id: 1007, pair: "BTC/USD", type: "venta", quantity: 0.042, price: 44100.00, date: "2025-02-12 08:30", status: "completado" },
-    { id: 1008, pair: "ETH/USD", type: "compra", quantity: 0.95, price: 2790.20, date: "2025-02-11 19:55", status: "completado" },
-    { id: 1009, pair: "XRP/USD", type: "venta", quantity: 2100, price: 0.52, date: "2025-02-10 13:12", status: "completado" },
-    { id: 1010, pair: "LINK/USD", type: "compra", quantity: 80, price: 14.75, date: "2025-02-09 16:40", status: "pendiente" },
-    { id: 1011, pair: "EUR/USD", type: "venta", quantity: 2500, price: 1.0945, date: "2025-02-08 10:15", status: "completado" },
-    { id: 1012, pair: "BTC/USD", type: "compra", quantity: 0.12, price: 42800.00, date: "2025-02-07 12:00", status: "completado" },
-    { id: 1013, pair: "SOL/USD", type: "compra", quantity: 30, price: 95.20, date: "2025-02-06 09:30", status: "completado" },
-    { id: 1014, pair: "MATIC/USD", type: "venta", quantity: 600, price: 0.89, date: "2025-02-05 23:20", status: "completado" },
-    { id: 1015, pair: "AVAX/USD", type: "compra", quantity: 25, price: 32.10, date: "2025-02-04 14:45", status: "completado" },
-    { id: 1016, pair: "DOT/USD", type: "venta", quantity: 110, price: 6.85, date: "2025-02-03 11:30", status: "pendiente" },
-    { id: 1017, pair: "UNI/USD", type: "compra", quantity: 45, price: 7.20, date: "2025-02-02 18:10", status: "completado" },
-    { id: 1018, pair: "BTC/USD", type: "venta", quantity: 0.025, price: 43560.00, date: "2025-02-01 20:55", status: "completado" },
-    { id: 1019, pair: "ETH/USD", type: "compra", quantity: 0.5, price: 2720.00, date: "2025-01-31 08:00", status: "completado" },
-    { id: 1020, pair: "ADA/USD", type: "venta", quantity: 800, price: 0.33, date: "2025-01-30 12:25", status: "completado" }
-  ];
+  (function() {
+    // Elementos
+    const form = document.getElementById('tradeForm');
+    const radioCompra = document.querySelector('input[value="compra"]');
+    const radioVenta = document.querySelector('input[value="venta"]');
+    const buyLabel = document.getElementById('buyLabel');
+    const sellLabel = document.getElementById('sellLabel');
+    const backLink = document.getElementById('backToHistory');
+    const tradeDateInput = document.getElementById('tradeDate');
 
-  // Configuración de paginación
-  const rowsPerPage = 6;   // 6 registros por página (tabla limpia)
-  let currentPage = 1;
-  let filteredTrades = [...mockTrades];
-  let searchTerm = "";
+    // Estilo visual de los radio buttons
+    function updateRadioStyles() {
+      if (radioCompra.checked) {
+        buyLabel.classList.add('selected-buy');
+        sellLabel.classList.remove('selected-sell');
+        buyLabel.style.background = '#e0f2e9';
+        sellLabel.style.background = '#f8fafc';
+        sellLabel.style.borderColor = '#e2e8f0';
+        buyLabel.style.borderColor = '#2c7da0';
+      } else {
+        sellLabel.classList.add('selected-sell');
+        buyLabel.classList.remove('selected-buy');
+        sellLabel.style.background = '#ffe8e6';
+        sellLabel.style.borderColor = '#b34a3c';
+        buyLabel.style.background = '#f8fafc';
+        buyLabel.style.borderColor = '#e2e8f0';
+      }
+    }
+    radioCompra.addEventListener('change', updateRadioStyles);
+    radioVenta.addEventListener('change', updateRadioStyles);
+    updateRadioStyles();
 
-  // Referencias DOM
-  const tbody = document.getElementById("tradeTableBody");
-  const paginationInfo = document.getElementById("paginationInfo");
-  const paginationButtons = document.getElementById("paginationButtons");
-  const searchInput = document.getElementById("searchInput");
-  const clearSearchBtn = document.getElementById("clearSearchBtn");
+    // Preestablecer fecha/hora actual
+    function setDefaultDateTime() {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      tradeDateInput.value = `${year}-${month}-${day}T${hours}:${minutes}`;
+    }
+    setDefaultDateTime();
 
-  // Función para filtrar según búsqueda (par o tipo)
-  function applySearchFilter() {
-    const term = searchTerm.trim().toLowerCase();
-    if (term === "") {
-      filteredTrades = [...mockTrades];
-    } else {
-      filteredTrades = mockTrades.filter(trade => 
-        trade.pair.toLowerCase().includes(term) || 
-        trade.type.toLowerCase().includes(term)
-      );
+    // Notificación flotante minimalista
+    function showMessage(message, type = 'success') {
+      const existing = document.querySelector('.floating-toast-register-op');
+      if (existing) existing.remove();
+      const toast = document.createElement('div');
+      toast.className = `floating-toast-register-op alert shadow`;
+      toast.style.position = 'fixed';
+      toast.style.bottom = '24px';
+      toast.style.left = '50%';
+      toast.style.transform = 'translateX(-50%)';
+      toast.style.zIndex = '9999';
+      toast.style.minWidth = '260px';
+      toast.style.maxWidth = '90vw';
+      toast.style.textAlign = 'center';
+      toast.style.backgroundColor = type === 'success' ? '#e2f3e4' : '#fff3e0';
+      toast.style.borderLeft = type === 'success' ? '4px solid #2c7da0' : '4px solid #e6a017';
+      toast.style.borderRadius = '20px';
+      toast.style.padding = '0.7rem 1rem';
+      toast.style.fontSize = '0.85rem';
+      toast.style.fontWeight = '500';
+      toast.style.color = '#1e2a3a';
+      const icon = type === 'success' ? '<i class="bi bi-check-circle-fill me-2" style="color:#2c7da0;"></i>' : '<i class="bi bi-info-circle-fill me-2" style="color:#e6a017;"></i>';
+      toast.innerHTML = `${icon} ${message}`;
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 2800);
     }
-    currentPage = 1;
-    renderTableAndPagination();
-  }
 
-  // Función para renderizar la tabla con paginación y filtros
-  function renderTableAndPagination() {
-    const totalRows = filteredTrades.length;
-    const totalPages = Math.ceil(totalRows / rowsPerPage);
-    if (currentPage > totalPages && totalPages > 0) currentPage = totalPages;
-    if (currentPage < 1) currentPage = 1;
-    
-    const startIdx = (currentPage - 1) * rowsPerPage;
-    const endIdx = startIdx + rowsPerPage;
-    const pageRows = filteredTrades.slice(startIdx, endIdx);
-    
-    // Renderizar tabla
-    if (pageRows.length === 0) {
-      tbody.innerHTML = `<tr class="empty-row"><td colspan="7">No se encontraron operaciones. <i class="bi bi-emoji-neutral"></i></td></tr>`;
-    } else {
-      tbody.innerHTML = pageRows.map(trade => {
-        const tipoBadge = trade.type === 'compra' 
-          ? '<span class="badge-buy"><i class="bi bi-arrow-up-short"></i> Compra</span>' 
-          : '<span class="badge-sell"><i class="bi bi-arrow-down-short"></i> Venta</span>';
-        const statusBadge = trade.status === 'completado' 
-          ? '<span class="status-completed"><i class="bi bi-check-circle-fill me-1"></i> Completado</span>' 
-          : '<span class="status-pending"><i class="bi bi-hourglass-split me-1"></i> Pendiente</span>';
-        // Formato cantidad: si es crypto pequeño muestra decimales, si no, entero
-        let quantityFormatted = trade.quantity;
-        if (trade.quantity % 1 !== 0) quantityFormatted = trade.quantity.toFixed(4);
-        else quantityFormatted = trade.quantity;
-        
-        return `<tr>
-          <td><span class="fw-semibold" style="color:#2c7da0;">${trade.id}</span></td>
-          <td><strong>${trade.pair}</strong></td>
-          <td>${tipoBadge}</td>
-          <td>${quantityFormatted}</td>
-          <td>$${trade.price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
-          <td>${trade.date}</td>
-          <td>${statusBadge}</td>
-        </tr>`;
-      }).join('');
-    }
-    
-    // Actualizar info de paginación
-    const startCount = totalRows === 0 ? 0 : startIdx + 1;
-    const endCount = Math.min(endIdx, totalRows);
-    paginationInfo.innerText = `Mostrando ${startCount} - ${endCount} de ${totalRows} operaciones`;
-    
-    // Generar botones de paginación
-    renderPaginationButtons(totalPages);
-  }
-  
-  function renderPaginationButtons(totalPages) {
-    if (totalPages <= 1) {
-      paginationButtons.innerHTML = '';
-      return;
-    }
-    let buttonsHtml = '';
-    // Botón anterior
-    buttonsHtml += `<button class="page-btn" data-page="prev" ${currentPage === 1 ? 'disabled' : ''}><i class="bi bi-chevron-left"></i></button>`;
-    
-    // Números de página (máximo 5 visibles para minimalismo)
-    let startPage = Math.max(1, currentPage - 2);
-    let endPage = Math.min(totalPages, currentPage + 2);
-    if (endPage - startPage < 4) {
-      if (startPage === 1) endPage = Math.min(totalPages, startPage + 4);
-      else if (endPage === totalPages) startPage = Math.max(1, endPage - 4);
-    }
-    for (let i = startPage; i <= endPage; i++) {
-      buttonsHtml += `<button class="page-btn ${i === currentPage ? 'active-page' : ''}" data-page="${i}">${i}</button>`;
-    }
-    
-    // Botón siguiente
-    buttonsHtml += `<button class="page-btn" data-page="next" ${currentPage === totalPages ? 'disabled' : ''}><i class="bi bi-chevron-right"></i></button>`;
-    paginationButtons.innerHTML = buttonsHtml;
-    
-    // Añadir event listeners a los botones
-    document.querySelectorAll('.page-btn').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        const pageVal = btn.getAttribute('data-page');
-        if (pageVal === 'prev' && currentPage > 1) {
-          currentPage--;
-          renderTableAndPagination();
-        } else if (pageVal === 'next' && currentPage < totalPages) {
-          currentPage++;
-          renderTableAndPagination();
-        } else if (!isNaN(parseInt(pageVal))) {
-          currentPage = parseInt(pageVal);
-          renderTableAndPagination();
-        }
-      });
+    // Validación y envío simulado
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validar campos requeridos
+      const pair = document.getElementById('pair').value;
+      const quantity = parseFloat(document.getElementById('quantity').value);
+      const entryPrice = parseFloat(document.getElementById('entryPrice').value);
+      const platform = document.getElementById('platform').value;
+      const tradeDate = document.getElementById('tradeDate').value;
+
+      if (!pair) { showMessage("Selecciona un par de trading.", "warning"); return; }
+      if (isNaN(quantity) || quantity <= 0) { showMessage("Cantidad válida (mayor a 0).", "warning"); document.getElementById('quantity').focus(); return; }
+      if (isNaN(entryPrice) || entryPrice <= 0) { showMessage("Precio de entrada válido.", "warning"); document.getElementById('entryPrice').focus(); return; }
+      if (!platform) { showMessage("Selecciona la plataforma o broker.", "warning"); return; }
+      if (!tradeDate) { showMessage("Selecciona la fecha/hora.", "warning"); return; }
+
+      // Recopilar datos (más de 15 campos)
+      const tradeType = document.querySelector('input[name="tradeType"]:checked').value;
+      const exitPrice = document.getElementById('exitPrice').value;
+      const commission = document.getElementById('commission').value;
+      const slippage = document.getElementById('slippage').value;
+      const takeProfit = document.getElementById('takeProfit').value;
+      const stopLoss = document.getElementById('stopLoss').value;
+      const leverage = document.getElementById('leverage').value;
+      const orderType = document.getElementById('orderType').value;
+      const tags = document.getElementById('tags').value;
+      const strategy = document.getElementById('strategy').value;
+      const tradeStatus = document.getElementById('tradeStatus').value;
+      const sentiment = document.getElementById('sentiment').value;
+      const notes = document.getElementById('notes').value;
+
+      // Simular objeto de operación completa
+      const newTrade = {
+        id: Math.floor(Math.random() * 10000) + 1000,
+        par: pair,
+        tipo: tradeType,
+        cantidad: quantity,
+        precioEntrada: entryPrice,
+        precioSalida: exitPrice || 'N/A',
+        comision: commission || '0',
+        slippage: slippage || '0',
+        takeProfit: takeProfit || 'N/A',
+        stopLoss: stopLoss || 'N/A',
+        apalancamiento: leverage || '1',
+        tipoOrden: orderType,
+        plataforma: platform,
+        etiquetas: tags || '—',
+        estrategia: strategy || 'No especificada',
+        estado: tradeStatus,
+        sentimiento: sentiment || 'neutral',
+        fecha: tradeDate.replace('T', ' '),
+        notas: notes || 'Sin notas'
+      };
+
+      console.log('Operación registrada (demo):', newTrade);
+      showMessage(`✅ Operación registrada: ${tradeType.toUpperCase()} ${quantity} ${pair} @ $${entryPrice}`, "success");
+
+      // Opcional: limpiar algunos campos para nuevo registro (manteniendo par y tipo)
+      document.getElementById('quantity').value = '';
+      document.getElementById('entryPrice').value = '';
+      document.getElementById('exitPrice').value = '';
+      document.getElementById('commission').value = '';
+      document.getElementById('slippage').value = '';
+      document.getElementById('takeProfit').value = '';
+      document.getElementById('stopLoss').value = '';
+      document.getElementById('leverage').value = '1';
+      document.getElementById('tags').value = '';
+      document.getElementById('sentiment').value = '';
+      document.getElementById('notes').value = '';
+      setDefaultDateTime();
+      // No reseteamos el par ni el tipo para agilidad
     });
-  }
-  
-  // Evento de búsqueda en tiempo real
-  function handleSearch() {
-    searchTerm = searchInput.value;
-    applySearchFilter();
-  }
-  
-  searchInput.addEventListener('input', handleSearch);
-  clearSearchBtn.addEventListener('click', () => {
-    searchInput.value = '';
-    searchTerm = '';
-    applySearchFilter();
-  });
-  
-  // Modal y agregar operación simulada (demo)
-  const modalElement = document.getElementById('registerTradeModal');
-  const registerModal = new bootstrap.Modal(modalElement);
-  const openModalBtn = document.getElementById('openRegisterModalBtn');
-  const demoAddBtn = document.getElementById('demoAddTradeBtn');
-  
-  openModalBtn.addEventListener('click', () => {
-    registerModal.show();
-  });
-  
-  // Simular agregar una nueva operación (actualiza tabla, reinicia búsqueda)
-  demoAddBtn.addEventListener('click', () => {
-    const newId = Math.max(...mockTrades.map(t => t.id)) + 1;
-    const now = new Date();
-    const formattedDate = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
-    const randomType = Math.random() > 0.5 ? 'compra' : 'venta';
-    const randomPair = ['BTC/USD','ETH/USD','EUR/USD','SOL/USD','ADA/USD'][Math.floor(Math.random()*5)];
-    const randomQty = (Math.random() * 1.5).toFixed(4);
-    const randomPrice = (Math.random() * 40000 + 500).toFixed(2);
-    const newTrade = {
-      id: newId,
-      pair: randomPair,
-      type: randomType,
-      quantity: parseFloat(randomQty),
-      price: parseFloat(randomPrice),
-      date: formattedDate,
-      status: "completado"
-    };
-    mockTrades.unshift(newTrade);   // agregar al inicio del array original
-    // Resetear filtro de búsqueda para mostrar el nuevo elemento
-    searchInput.value = '';
-    searchTerm = '';
-    applySearchFilter();  // esto reasigna filteredTrades y re-renderiza
-    registerModal.hide();
-    // Pequeño feedback sutil (sin alertas pesadas)
-    const toastMsg = document.createElement('div');
-    toastMsg.innerText = `✅ Nueva operación registrada: ${newTrade.pair} (${newTrade.type})`;
-    toastMsg.style.position = 'fixed';
-    toastMsg.style.bottom = '20px';
-    toastMsg.style.left = '50%';
-    toastMsg.style.transform = 'translateX(-50%)';
-    toastMsg.style.backgroundColor = '#1e293b';
-    toastMsg.style.color = '#f1f5f9';
-    toastMsg.style.padding = '10px 20px';
-    toastMsg.style.borderRadius = '40px';
-    toastMsg.style.fontSize = '0.8rem';
-    toastMsg.style.zIndex = '9999';
-    toastMsg.style.backdropFilter = 'blur(8px)';
-    toastMsg.style.fontWeight = '500';
-    toastMsg.style.boxShadow = '0 5px 15px rgba(0,0,0,0.1)';
-    document.body.appendChild(toastMsg);
-    setTimeout(() => toastMsg.remove(), 2000);
-  });
-  
-  // Inicializar tabla
-  renderTableAndPagination();
+
+    backLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      showMessage("🔁 Demo: Redirigiendo al historial de trades", "info");
+      // Simular navegación: window.location.href = 'historial.html';
+    });
+  })();
 </script>
 </body>
 </html>
