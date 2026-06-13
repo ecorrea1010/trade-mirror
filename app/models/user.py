@@ -32,6 +32,7 @@ class User(UserMixin, db.Model):
 
     profile = db.relationship("UserProfile", back_populates="user", uselist=False)
     roles   = db.relationship("UserRole", back_populates="user")
+    trades = db.relationship("Trade", back_populates="user", lazy="dynamic")
 
     def set_password(self, raw_password):
         self.password = generate_password_hash(raw_password)
